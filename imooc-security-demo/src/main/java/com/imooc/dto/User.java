@@ -8,6 +8,7 @@ import java.util.Date;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.imooc.validate.MyConstraint;
 
 /**
  * @author zhailiang
@@ -20,9 +21,10 @@ public class User {
 	
 	private String id;
 	
+	@MyConstraint
 	private String username;
 	
-	@NotBlank
+	@NotBlank(message = "hahaha")
 	private String password;
 	
 	private Date birthday;
