@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.imooc.dto.User;
 import com.imooc.dto.UserQueryCondition;
+import com.imooc.exception.UserNotExistException;
 
 /**
  * @author zhailiang
@@ -35,11 +36,7 @@ import com.imooc.dto.UserQueryCondition;
 public class UserController {
 
 	@PostMapping
-	public User create(@Valid @RequestBody User user, BindingResult errors) {
-
-		if (errors.hasErrors()) {
-			errors.getAllErrors().stream().forEach(error -> System.out.println(error.getDefaultMessage()));
-		}
+	public User create(@Valid @RequestBody User user) {
 
 		System.out.println(user.getId());
 		System.out.println(user.getUsername());
@@ -97,9 +94,12 @@ public class UserController {
 	@GetMapping("/{id:\\d+}")
 	@JsonView(User.UserDetailView.class)
 	public User getInfo(@PathVariable String id) {
-		User user = new User();
-		user.setUsername("tom");
-		return user;
+		
+		throw new UserNotExistException(id);
+		
+//		User user = new User();
+//		user.setUsername("tom");
+//		return user;
 	}
 
 }
