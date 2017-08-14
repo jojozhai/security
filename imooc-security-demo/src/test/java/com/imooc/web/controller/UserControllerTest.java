@@ -91,6 +91,21 @@ public class UserControllerTest {
 	}
 	
 	@Test
+	public void whenCreateFail() throws Exception {
+		
+		Date date = new Date();
+		System.out.println(date.getTime());
+		String content = "{\"username\":\"tom\",\"password\":null,\"birthday\":"+date.getTime()+"}";
+		String reuslt = mockMvc.perform(post("/user").contentType(MediaType.APPLICATION_JSON_UTF8)
+				.content(content))
+//				.andExpect(status().isOk())
+//				.andExpect(jsonPath("$.id").value("1"))
+				.andReturn().getResponse().getContentAsString();
+		
+		System.out.println(reuslt);
+	}
+	
+	@Test
 	public void whenUpdateSuccess() throws Exception {
 		
 		Date date = new Date(LocalDateTime.now().plusYears(1).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
