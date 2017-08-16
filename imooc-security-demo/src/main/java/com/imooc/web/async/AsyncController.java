@@ -43,26 +43,25 @@ public class AsyncController {
 	
 	
 	@GetMapping
-	public String order() throws Exception {
+	public Callable<String> order() throws Exception {
 		
 		long start = System.currentTimeMillis();
 		
-		System.out.println("主线程开始");
+		logger.info("主线程开始");
 		
 		Callable<String> result = new Callable<String>() {
 			@Override
 			public String call() throws Exception {
-				System.out.println("副线程开始");
+				logger.info("副线程开始");
 				Thread.sleep(1000);
-				System.out.println("副线程返回，耗时:"+(System.currentTimeMillis() - start));
+				logger.info("副线程返回，耗时:"+(System.currentTimeMillis() - start));
 				return "hello";
 			}
 		};
 		
-		String str = result.call();
-		System.out.println("主线程返回,耗时:"+ (System.currentTimeMillis() - start));
+		logger.info("主线程返回");
 		
-		return str;
+		return result;
 		
 	}
 
