@@ -26,6 +26,9 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.imooc.dto.User;
 import com.imooc.dto.UserQueryCondition;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 /**
  * @author zhailiang
  *
@@ -74,6 +77,7 @@ public class UserController {
 
 	@GetMapping
 	@JsonView(User.UserSimpleView.class)
+	@ApiOperation(value = "用户查询服务")
 	public List<User> query(UserQueryCondition condition,
 			@PageableDefault(page = 2, size = 17, sort = "username,asc") Pageable pageable) {
 
@@ -92,7 +96,7 @@ public class UserController {
 
 	@GetMapping("/{id:\\d+}")
 	@JsonView(User.UserDetailView.class)
-	public User getInfo(@PathVariable String id) {
+	public User getInfo(@ApiParam("用户id") @PathVariable String id) {
 //		throw new RuntimeException("user not exist");
 		System.out.println("进入getInfo服务");
 		User user = new User();
