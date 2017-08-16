@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
  * @author zhailiang
  *
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class TimeAspect {
 	
 	@Around("execution(* com.imooc.web.controller.UserController.*(..))")
