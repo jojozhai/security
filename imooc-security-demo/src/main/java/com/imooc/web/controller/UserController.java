@@ -35,7 +35,7 @@ import com.imooc.dto.UserQueryCondition;
 public class UserController {
 
 	@PostMapping
-	public User create(@Valid @RequestBody User user, BindingResult errors) {
+	public User create(@Valid @RequestBody User user) {
 
 		System.out.println(user.getId());
 		System.out.println(user.getUsername());
@@ -84,11 +84,11 @@ public class UserController {
 	@GetMapping("/{id:\\d+}")
 	@JsonView(User.UserDetailView.class)
 	public User getInfo(@PathVariable String id) {
-
-		throw new RuntimeException("test");
-		// User user = new User();
-		// user.setUsername("tom");
-		// return user;
+//		throw new RuntimeException("user not exist");
+		System.out.println("进入getInfo服务");
+		User user = new User();
+		user.setUsername("tom");
+		return user;
 	}
 
 }
