@@ -26,6 +26,9 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.imooc.dto.User;
 import com.imooc.dto.UserQueryCondition;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 /**
  * @author zhailiang
  *
@@ -35,6 +38,7 @@ import com.imooc.dto.UserQueryCondition;
 public class UserController {
 
 	@PostMapping
+	@ApiOperation(value = "创建用户")
 	public User create(@Valid @RequestBody User user) {
 
 		System.out.println(user.getId());
@@ -83,7 +87,7 @@ public class UserController {
 
 	@GetMapping("/{id:\\d+}")
 	@JsonView(User.UserDetailView.class)
-	public User getInfo(@PathVariable String id) {
+	public User getInfo(@ApiParam(value = "用户id") @PathVariable String id) {
 //		throw new RuntimeException("user not exist");
 		System.out.println("进入getInfo服务");
 		User user = new User();
