@@ -38,6 +38,7 @@ import io.swagger.annotations.ApiParam;
 public class UserController {
 
 	@PostMapping
+	@ApiOperation(value = "创建用户")
 	public User create(@Valid @RequestBody User user) {
 
 		System.out.println(user.getId());
@@ -51,15 +52,6 @@ public class UserController {
 
 	@PutMapping("/{id:\\d+}")
 	public User update(@Valid @RequestBody User user, BindingResult errors) {
-
-		if (errors.hasErrors()) {
-			errors.getAllErrors().stream().forEach(error -> {
-				// FieldError fieldError = (FieldError)error;
-				// String message = fieldError.getField() +" "+
-				// error.getDefaultMessage();
-				System.out.println(error.getDefaultMessage());
-			});
-		}
 
 		System.out.println(user.getId());
 		System.out.println(user.getUsername());

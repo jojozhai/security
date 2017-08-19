@@ -36,6 +36,8 @@ public class AsyncController {
 		DeferredResult<String> result = new DeferredResult<>();
 		deferredResultHolder.getMap().put(orderNumber, result);
 		
+		return result;
+		
 //		Callable<String> result = new Callable<String>() {
 //			@Override
 //			public String call() throws Exception {
@@ -45,10 +47,6 @@ public class AsyncController {
 //				return "success";
 //			}
 //		};
-		
-		logger.info("主线程返回");
-		
-		return result;
 	}
 
 }

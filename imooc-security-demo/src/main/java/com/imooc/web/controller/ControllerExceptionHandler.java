@@ -20,7 +20,7 @@ import com.imooc.exception.UserNotExistException;
  */
 @ControllerAdvice
 public class ControllerExceptionHandler {
-	
+
 	@ExceptionHandler(UserNotExistException.class)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
