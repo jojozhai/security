@@ -5,16 +5,14 @@ package com.imooc.validator;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 
 /**
  * @author zhailiang
  *
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class ValidateAspect {
 	
 	@Around("execution(* com.imooc.web.controller.UserController.*(..))")
