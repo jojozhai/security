@@ -44,6 +44,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		ValidateCodeFilter validateCodeFilter = new ValidateCodeFilter();
 		validateCodeFilter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);
+		validateCodeFilter.setSecurityProperties(securityProperties);
+		validateCodeFilter.afterPropertiesSet();
 		
 		http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
 			.formLogin()
