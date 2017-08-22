@@ -13,7 +13,7 @@ import com.imooc.security.core.validate.code.ValidateCodeGenerator;
  * @author zhailiang
  *
  */
-@Component("imageCodeGenerator")
+//@Component("imageCodeGenerator")
 public class DemoImageCodeGenerator implements ValidateCodeGenerator {
 
 	/* (non-Javadoc)
