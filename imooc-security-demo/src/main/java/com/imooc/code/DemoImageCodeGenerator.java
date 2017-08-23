@@ -6,8 +6,8 @@ package com.imooc.code;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 
-import com.imooc.security.core.validate.code.ImageCode;
 import com.imooc.security.core.validate.code.ValidateCodeGenerator;
+import com.imooc.security.core.validate.code.image.ImageCode;
 
 /**
  * @author zhailiang

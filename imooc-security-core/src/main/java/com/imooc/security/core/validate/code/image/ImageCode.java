@@ -1,10 +1,12 @@
 /**
  * 
  */
-package com.imooc.security.core.validate.code;
+package com.imooc.security.core.validate.code.image;
 
 import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
+
+import com.imooc.security.core.validate.code.ValidateCode;
 
 
 /**
@@ -13,7 +15,7 @@ import java.time.LocalDateTime;
  */
 public class ImageCode extends ValidateCode {
 	
-	private BufferedImage image;
+	private BufferedImage image; 
 	
 	public ImageCode(BufferedImage image, String code, int expireIn){
 		super(code, expireIn);

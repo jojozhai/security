@@ -14,7 +14,7 @@ public class ValidateCodeProperties {
 	private SmsCodeProperties sms = new SmsCodeProperties();
 
 	public ImageCodeProperties getImage() {
-		return image;
+		return image; 
 	}
 
 	public void setImage(ImageCodeProperties image) {
@@ -28,7 +28,5 @@ public class ValidateCodeProperties {
 	public void setSms(SmsCodeProperties sms) {
 		this.sms = sms;
 	}
-	
-	
 	
 }

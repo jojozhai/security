@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.imooc.security.core.validate.code;
+package com.imooc.security.core.validate.code.image;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import com.imooc.security.core.properties.SecurityProperties;
+import com.imooc.security.core.validate.code.ValidateCodeGenerator;
 
 /**
  * @author zhailiang
@@ -21,6 +22,9 @@ import com.imooc.security.core.properties.SecurityProperties;
  */
 public class ImageCodeGenerator implements ValidateCodeGenerator {
 
+	/**
+	 * 系统配置
+	 */
 	@Autowired
 	private SecurityProperties securityProperties;
 	

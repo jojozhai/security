@@ -15,16 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
-import com.imooc.security.core.authentication.sms.SmsCodeAuthenticationFilter;
-import com.imooc.security.core.authentication.sms.SmsCodeAuthenticationProvider;
-import com.imooc.security.core.authentication.sms.TempConfig;
 import com.imooc.security.core.properties.SecurityProperties;
-import com.imooc.security.core.validate.code.SmsCodeFilter;
-import com.imooc.security.core.validate.code.ValidateCodeFilter;
 
 /**
  * @author zhailiang
@@ -61,10 +55,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 		return tokenRepository;
 	}
 	
-	@Autowired
-	private TempConfig tempConfig;
-	
-	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.formLogin()
@@ -82,28 +72,11 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers("/authentication/require",
 					securityProperties.getBrowser().getLoginPage(),
-					"/code/image", "/code/sms").permitAll()
+					"/code/*").permitAll()
 			.anyRequest()
 			.authenticated()
 			.and()
 			.csrf().disable();
 		
-		
-		ValidateCodeFilter validateCodeFilter = new ValidateCodeFilter();
-		validateCodeFilter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);
-		validateCodeFilter.setSecurityProperties(securityProperties);
-		validateCodeFilter.afterPropertiesSet();
-		
-		SmsCodeFilter smsCodeFilter = new SmsCodeFilter();
-		smsCodeFilter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);
-		smsCodeFilter.setSecurityProperties(securityProperties);
-		smsCodeFilter.afterPropertiesSet();
-		
-		http.apply(tempConfig);
-		
-		http.addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class)
-			.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class);
-		
 	}
-
 }
