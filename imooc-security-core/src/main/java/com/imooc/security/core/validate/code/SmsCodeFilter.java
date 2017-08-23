@@ -30,7 +30,7 @@ import com.imooc.security.core.properties.SecurityProperties;
  * @author zhailiang
  *
  */
-public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean {
+public class SmsCodeFilter extends OncePerRequestFilter implements InitializingBean {
 	
 	private AuthenticationFailureHandler authenticationFailureHandler;
 	
@@ -51,7 +51,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 				urls.add(configUrl);
 			}
 		}
-		urls.add("/authentication/form");
+		urls.add("/authentication/mobile");
 	}
 
 	/* (non-Javadoc)
@@ -85,10 +85,10 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
 	private void validate(ServletWebRequest request) throws ServletRequestBindingException {
 		
-		ImageCode codeInSession = (ImageCode) sessionStrategy.getAttribute(request,
-				ValidateCodeController.SESSION_KEY_FOR_CODE_IMAGE);
+		ValidateCode codeInSession = (ValidateCode) sessionStrategy.getAttribute(request,
+				ValidateCodeController.SESSION_KEY_FOR_CODE_SMS);
 
-		String codeInRequest = ServletRequestUtils.getStringParameter(request.getRequest(), "imageCode");
+		String codeInRequest = ServletRequestUtils.getStringParameter(request.getRequest(), "smsCode");
 
 		if (StringUtils.isBlank(codeInRequest)) {
 			throw new ValidateCodeException("验证码的值不能为空");
@@ -99,7 +99,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 		}
 
 		if(codeInSession.isExpried()){
-			sessionStrategy.removeAttribute(request, ValidateCodeController.SESSION_KEY_FOR_CODE_IMAGE);
+			sessionStrategy.removeAttribute(request, ValidateCodeController.SESSION_KEY_FOR_CODE_SMS);
 			throw new ValidateCodeException("验证码已过期");
 		}
 		
@@ -107,7 +107,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 			throw new ValidateCodeException("验证码不匹配");
 		}
 		
-		sessionStrategy.removeAttribute(request, ValidateCodeController.SESSION_KEY_FOR_CODE_IMAGE);
+		sessionStrategy.removeAttribute(request, ValidateCodeController.SESSION_KEY_FOR_CODE_SMS);
 	}
 
 	public AuthenticationFailureHandler getAuthenticationFailureHandler() {

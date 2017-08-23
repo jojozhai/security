@@ -19,7 +19,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
+import com.imooc.security.core.authentication.sms.SmsCodeAuthenticationFilter;
+import com.imooc.security.core.authentication.sms.SmsCodeAuthenticationProvider;
+import com.imooc.security.core.authentication.sms.TempConfig;
 import com.imooc.security.core.properties.SecurityProperties;
+import com.imooc.security.core.validate.code.SmsCodeFilter;
 import com.imooc.security.core.validate.code.ValidateCodeFilter;
 
 /**
@@ -57,16 +61,13 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 		return tokenRepository;
 	}
 	
+	@Autowired
+	private TempConfig tempConfig;
+	
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
-		ValidateCodeFilter validateCodeFilter = new ValidateCodeFilter();
-		validateCodeFilter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);
-		validateCodeFilter.setSecurityProperties(securityProperties);
-		validateCodeFilter.afterPropertiesSet();
-		
-		http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
-			.formLogin()
+		http.formLogin()
 				.loginPage("/authentication/require")
 				.loginProcessingUrl("/authentication/form")
 				.successHandler(imoocAuthenticationSuccessHandler)
@@ -81,11 +82,27 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers("/authentication/require",
 					securityProperties.getBrowser().getLoginPage(),
-					"/code/image").permitAll()
+					"/code/image", "/code/sms").permitAll()
 			.anyRequest()
 			.authenticated()
 			.and()
 			.csrf().disable();
+		
+		
+		ValidateCodeFilter validateCodeFilter = new ValidateCodeFilter();
+		validateCodeFilter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);
+		validateCodeFilter.setSecurityProperties(securityProperties);
+		validateCodeFilter.afterPropertiesSet();
+		
+		SmsCodeFilter smsCodeFilter = new SmsCodeFilter();
+		smsCodeFilter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);
+		smsCodeFilter.setSecurityProperties(securityProperties);
+		smsCodeFilter.afterPropertiesSet();
+		
+		http.apply(tempConfig);
+		
+		http.addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class)
+			.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class);
 		
 	}
 
