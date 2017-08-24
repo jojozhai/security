@@ -20,7 +20,6 @@ import org.springframework.security.web.authentication.rememberme.JdbcTokenRepos
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import com.imooc.security.core.properties.SecurityProperties;
-import com.imooc.security.core.validate.code.SmsCodeFilter;
 import com.imooc.security.core.validate.code.ValidateCodeFilter;
 
 /**
@@ -65,9 +64,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 		validateCodeFilter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);
 		validateCodeFilter.setSecurityProperties(securityProperties);
 		validateCodeFilter.afterPropertiesSet();
-		
-		http.addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class)
-			.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
+			
+		http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
 			.formLogin()
 				.loginPage("/authentication/require")
 				.loginProcessingUrl("/authentication/form")
