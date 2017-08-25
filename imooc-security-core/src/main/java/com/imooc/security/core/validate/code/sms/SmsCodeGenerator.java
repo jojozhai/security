@@ -16,7 +16,7 @@ import com.imooc.security.core.validate.code.ValidateCodeGenerator;
  * @author zhailiang
  *
  */
-@Component("smsCodeGenerator")
+@Component("smsValidateCodeGenerator")
 public class SmsCodeGenerator implements ValidateCodeGenerator {
 
 	@Autowired

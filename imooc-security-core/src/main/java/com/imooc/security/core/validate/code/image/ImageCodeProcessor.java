@@ -16,7 +16,7 @@ import com.imooc.security.core.validate.code.impl.AbstractValidateCodeProcessor;
  * @author zhailiang
  *
  */
-@Component("imageCodeProcessor")
+@Component("imageValidateCodeProcessor")
 public class ImageCodeProcessor extends AbstractValidateCodeProcessor<ImageCode> {
 
 	/**
