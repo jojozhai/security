@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 import com.imooc.security.core.authentication.AbstractChannelSecurityConfig;
 import com.imooc.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
@@ -43,6 +44,8 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 	@Autowired
 	private ValidateCodeSecurityConfig validateCodeSecurityConfig;
 	
+	@Autowired
+	private SpringSocialConfigurer imoocSocialSecurityConfig;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -52,6 +55,8 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 		http.apply(validateCodeSecurityConfig)
 				.and()
 			.apply(smsCodeAuthenticationSecurityConfig)
+				.and()
+			.apply(imoocSocialSecurityConfig)
 				.and()
 			.rememberMe()
 				.tokenRepository(persistentTokenRepository())
