@@ -18,6 +18,7 @@ public class ImoocSpringSocialConfigurer extends SpringSocialConfigurer {
 		this.filterProcessesUrl = filterProcessesUrl;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected <T> T postProcess(T object) {
 		SocialAuthenticationFilter filter = (SocialAuthenticationFilter) super.postProcess(object);
