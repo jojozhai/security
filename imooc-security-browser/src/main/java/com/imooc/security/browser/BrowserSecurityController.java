@@ -18,13 +18,18 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.web.ProviderSignInUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.ServletWebRequest;
 
 import com.imooc.security.browser.support.SimpleResponse;
 import com.imooc.security.core.properties.SecurityConstants;
 import com.imooc.security.core.properties.SecurityProperties;
+import com.imooc.security.core.social.SocialUserInfo;
 
 /**
  * @author zhailiang
@@ -41,6 +46,9 @@ public class BrowserSecurityController {
 	
 	@Autowired
 	private SecurityProperties securityProperties;
+	
+	@Autowired
+	private ProviderSignInUtils providerSignInUtils;
 
 	/**
 	 * 当需要身份认证时，跳转到这里
@@ -65,6 +73,20 @@ public class BrowserSecurityController {
 		}
 
 		return new SimpleResponse("访问的服务需要身份认证，请引导用户到登录页");
+	}
+	
+	@GetMapping("/social/user")
+	public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
+		SocialUserInfo socialUserInfo = null;
+		Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
+		if(connection != null){
+			socialUserInfo = new SocialUserInfo();
+			socialUserInfo.setProviderId(connection.getKey().getProviderId());
+			socialUserInfo.setProviderUserId(connection.getKey().getProviderUserId());
+			socialUserInfo.setNickname(connection.getDisplayName());
+			socialUserInfo.setHeadimg(connection.getImageUrl());
+		}
+		return socialUserInfo;
 	}
 
 }

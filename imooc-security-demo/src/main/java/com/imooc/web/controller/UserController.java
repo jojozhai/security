@@ -6,14 +6,17 @@ package com.imooc.web.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.ServletWebRequest;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.imooc.dto.User;
@@ -38,6 +42,17 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+	
+	@Autowired
+	private ProviderSignInUtils providerSignInUtils;
+	
+	@PostMapping("/signUp")
+	public void signUp(HttpServletRequest request, User user) {
+		//根据用户的选择进行用户注册或绑定，不论进行哪种操作，最后都应该得到一个用户的唯一标识，在
+		//这里我们使用用户填写的用户名作为唯一标识来绑定服务提供商用户
+		String userId = user.getUsername();
+		providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
+	}
 	
 	@GetMapping("/me")
 	public Object getCurrentUser(@AuthenticationPrincipal UserDetails user) {
