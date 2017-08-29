@@ -16,6 +16,8 @@ import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.security.SpringSocialConfigurer;
 
+import com.imooc.security.core.properties.SecurityProperties;
+
 /**
  * @author zhailiang
  *
@@ -27,6 +29,9 @@ public class SocialConfig extends SocialConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 	
+	@Autowired
+	private SecurityProperties securityProperties;
+	
 	@Override
 	public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
 		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
@@ -36,7 +41,9 @@ public class SocialConfig extends SocialConfigurerAdapter {
 	
 	@Bean
 	public SpringSocialConfigurer imoocSocialSecurityConfig() {
-		return new SpringSocialConfigurer();
+		String filterProcessesUrl = securityProperties.getSocial().getFilterProcessesUrl();
+		ImoocSpringSocialConfigurer configurer = new ImoocSpringSocialConfigurer(filterProcessesUrl);
+		return configurer;
 	}
 	
 }

@@ -39,6 +39,13 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping("/user")
 public class UserController {
 	
+	@PostMapping("/regist")
+	public void regist(User user) {
+		
+		//注册用户
+		
+	}
+	
 	@GetMapping("/me")
 	public Object getCurrentUser(@AuthenticationPrincipal UserDetails user) {
 		return user;
