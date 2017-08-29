@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @author zhailiang
  *
  */
-@Component
+//@Component
 public class DemoConnectionSignUp implements ConnectionSignUp {
 
 	/* (non-Javadoc)
