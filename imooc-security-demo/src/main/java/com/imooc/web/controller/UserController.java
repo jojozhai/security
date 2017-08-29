@@ -6,14 +6,17 @@ package com.imooc.web.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.ServletWebRequest;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.imooc.dto.User;
@@ -39,11 +43,15 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping("/user")
 public class UserController {
 	
+	@Autowired
+	private ProviderSignInUtils providerSignInUtils;
+	
 	@PostMapping("/regist")
-	public void regist(User user) {
+	public void regist(User user, HttpServletRequest request) {
 		
-		//注册用户
-		
+		//不管是注册用户还是绑定用户，都会拿到一个用户唯一标识。
+		String userId = user.getUsername();
+		providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
 	}
 	
 	@GetMapping("/me")
