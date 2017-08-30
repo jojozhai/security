@@ -37,16 +37,16 @@ import com.imooc.security.core.properties.SecurityProperties;
  */
 @RestController
 public class BrowserSecurityController {
-	
+
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	private RequestCache requestCache = new HttpSessionRequestCache();
-	
+
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-	
+
 	@Autowired
 	private SecurityProperties securityProperties;
-	
+
 	@Autowired
 	private ProviderSignInUtils providerSignInUtils;
 
@@ -56,25 +56,26 @@ public class BrowserSecurityController {
 	 * @param request
 	 * @param response
 	 * @return
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@RequestMapping(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)
 	@ResponseStatus(code = HttpStatus.UNAUTHORIZED)
-	public SimpleResponse requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public SimpleResponse requireAuthentication(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 
 		if (savedRequest != null) {
 			String targetUrl = savedRequest.getRedirectUrl();
-			logger.info("引发跳转的请求是:"+targetUrl);
-			if(StringUtils.endsWithIgnoreCase(targetUrl, ".html")){
+			logger.info("引发跳转的请求是:" + targetUrl);
+			if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
 				redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
 			}
 		}
 
 		return new SimpleResponse("访问的服务需要身份认证，请引导用户到登录页");
 	}
-	
+
 	@GetMapping("/social/user")
 	public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
 		SocialUserInfo userInfo = new SocialUserInfo();
@@ -84,6 +85,16 @@ public class BrowserSecurityController {
 		userInfo.setNickname(connection.getDisplayName());
 		userInfo.setHeadimg(connection.getImageUrl());
 		return userInfo;
+	}
+
+	@GetMapping(SecurityConstants.DEFAULT_SESSION_INVALID_URL)
+	@ResponseStatus(code = HttpStatus.UNAUTHORIZED)
+	public SimpleResponse sessionInvalid(boolean concurrency) {
+		String message = "session失效";
+		if(concurrency) {
+			message = message + ",有可能是并发登录导致的";
+		}
+		return new SimpleResponse(message);
 	}
 
 }
