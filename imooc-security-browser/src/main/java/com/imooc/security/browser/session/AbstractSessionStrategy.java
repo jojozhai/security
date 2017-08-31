@@ -39,7 +39,7 @@ public class AbstractSessionStrategy {
 	 * 跳转前是否创建新的session
 	 */
 	private boolean createNewSession = true;
-	
+
 	private ObjectMapper objectMapper = new ObjectMapper();
 
 	/**
@@ -48,6 +48,7 @@ public class AbstractSessionStrategy {
 	 */
 	public AbstractSessionStrategy(String invalidSessionUrl) {
 		Assert.isTrue(UrlUtils.isValidRedirectUrl(invalidSessionUrl), "url must start with '/' or with 'http(s)'");
+		Assert.isTrue(StringUtils.endsWithIgnoreCase(invalidSessionUrl, ".html"), "url must end with '.html'");
 		this.destinationUrl = invalidSessionUrl;
 	}
 
@@ -60,6 +61,8 @@ public class AbstractSessionStrategy {
 	 */
 	protected void onSessionInvalid(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+		logger.info("session失效");
+		
 		if (createNewSession) {
 			request.getSession();
 		}
@@ -68,16 +71,16 @@ public class AbstractSessionStrategy {
 		String targetUrl;
 
 		if (StringUtils.endsWithIgnoreCase(sourceUrl, ".html")) {
-			targetUrl = destinationUrl+".html";
-			logger.info("session失效,跳转到"+targetUrl);
+			targetUrl = destinationUrl;
+			logger.info("跳转到:"+targetUrl);
 			redirectStrategy.sendRedirect(request, response, targetUrl);
-		}else{
+		} else {
 			Object result = buildResponseContent(request);
 			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().write(objectMapper.writeValueAsString(result));
 		}
-		
+
 	}
 
 	/**
@@ -86,7 +89,7 @@ public class AbstractSessionStrategy {
 	 */
 	protected Object buildResponseContent(HttpServletRequest request) {
 		String message = "session已失效";
-		if(isConcurrency()){
+		if (isConcurrency()) {
 			message = message + "，有可能是并发登录导致的";
 		}
 		return new SimpleResponse(message);
@@ -94,6 +97,7 @@ public class AbstractSessionStrategy {
 
 	/**
 	 * session失效是否是并发导致的
+	 * 
 	 * @return
 	 */
 	protected boolean isConcurrency() {
@@ -112,5 +116,5 @@ public class AbstractSessionStrategy {
 	public void setCreateNewSession(boolean createNewSession) {
 		this.createNewSession = createNewSession;
 	}
-	
+
 }
