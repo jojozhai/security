@@ -59,10 +59,12 @@ public class AbstractSessionStrategy {
 		}
 
 		String sourceUrl = request.getRequestURI();
-		String targetUrl = destinationUrl;
+		String targetUrl;
 
 		if (StringUtils.endsWithIgnoreCase(sourceUrl, ".html")) {
-			targetUrl = destinationUrl + ".html";
+			targetUrl = destinationUrl+".html";
+		}else{
+			targetUrl = destinationUrl+".json";
 		}
 
 		logger.info("session失效,跳转到" + targetUrl);
