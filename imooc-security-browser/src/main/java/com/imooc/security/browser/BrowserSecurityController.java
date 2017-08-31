@@ -87,14 +87,4 @@ public class BrowserSecurityController {
 		return userInfo;
 	}
 
-	@GetMapping(SecurityConstants.DEFAULT_SESSION_INVALID_URL+".json")
-	@ResponseStatus(code = HttpStatus.UNAUTHORIZED)
-	public SimpleResponse sessionInvalid(boolean concurrency) {
-		String message = "session失效";
-		if(concurrency) {
-			message = message + ",有可能是并发登录导致的";
-		}
-		return new SimpleResponse(message);
-	}
-
 }

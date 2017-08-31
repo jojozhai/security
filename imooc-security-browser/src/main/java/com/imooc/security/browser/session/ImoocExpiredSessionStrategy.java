@@ -29,11 +29,11 @@ public class ImoocExpiredSessionStrategy extends AbstractSessionStrategy impleme
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.imooc.security.browser.session.AbstractSessionStrategy#processRedirectUrl(java.lang.String)
+	 * @see com.imooc.security.browser.session.AbstractSessionStrategy#isConcurrency()
 	 */
 	@Override
-	protected String processRedirectUrl(String targetUrl) {
-		return targetUrl+"?concurrency=true";
+	protected boolean isConcurrency() {
+		return true;
 	}
 
 }
