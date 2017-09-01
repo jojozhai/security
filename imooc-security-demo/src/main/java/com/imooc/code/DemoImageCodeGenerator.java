@@ -3,7 +3,6 @@
  */
 package com.imooc.code;
 
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import com.imooc.security.core.validate.code.ValidateCodeGenerator;

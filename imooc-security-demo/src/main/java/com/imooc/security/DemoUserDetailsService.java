@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class MyUserDetailsService implements UserDetailsService, SocialUserDetailsService {
+public class DemoUserDetailsService implements UserDetailsService, SocialUserDetailsService {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
