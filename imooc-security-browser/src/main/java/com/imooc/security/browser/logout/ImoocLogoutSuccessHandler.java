@@ -16,7 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.imooc.security.browser.support.SimpleResponse;
+import com.imooc.security.core.support.SimpleResponse;
 
 /**
  * @author zhailiang

@@ -26,10 +26,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
 
-import com.imooc.security.browser.support.SimpleResponse;
 import com.imooc.security.browser.support.SocialUserInfo;
 import com.imooc.security.core.properties.SecurityConstants;
 import com.imooc.security.core.properties.SecurityProperties;
+import com.imooc.security.core.support.SimpleResponse;
 
 /**
  * @author zhailiang

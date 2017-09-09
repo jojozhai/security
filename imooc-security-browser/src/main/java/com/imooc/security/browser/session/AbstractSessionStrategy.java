@@ -18,7 +18,7 @@ import org.springframework.security.web.util.UrlUtils;
 import org.springframework.util.Assert;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.imooc.security.browser.support.SimpleResponse;
+import com.imooc.security.core.support.SimpleResponse;
 
 /**
  * @author zhailiang

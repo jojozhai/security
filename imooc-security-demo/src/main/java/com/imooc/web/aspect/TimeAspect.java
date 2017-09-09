@@ -7,13 +7,15 @@ import java.util.Date;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
 
 /**
  * @author zhailiang
  *
  */
-//@Aspect
-//@Component
+@Aspect
+@Component
 public class TimeAspect {
 	
 	@Around("execution(* com.imooc.web.controller.UserController.*(..))")
