@@ -52,8 +52,8 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
 			.successHandler(imoocAuthenticationSuccessHandler)
 			.failureHandler(imoocAuthenticationFailureHandler);
 		
-		http//.apply(validateCodeSecurityConfig)
-			//	.and()
+		http.apply(validateCodeSecurityConfig)
+				.and()
 			.apply(smsCodeAuthenticationSecurityConfig)
 				.and()
 			.apply(imoocSocialSecurityConfig)
