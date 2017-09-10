@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.imooc.security.app.social.openid;
+package com.imooc.security.app.authentication.openid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

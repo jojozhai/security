@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.imooc.security.app.social.openid;
+package com.imooc.security.app.authentication.openid;
 
 import java.util.Collection;
 

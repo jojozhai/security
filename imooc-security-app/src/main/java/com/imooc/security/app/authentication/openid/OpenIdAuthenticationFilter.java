@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.imooc.security.app.social.openid;
+package com.imooc.security.app.authentication.openid;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

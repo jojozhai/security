@@ -12,7 +12,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.social.security.SpringSocialConfigurer;
 
-import com.imooc.security.app.social.openid.OpenIdAuthenticationSecurityConfig;
+import com.imooc.security.app.authentication.openid.OpenIdAuthenticationSecurityConfig;
 import com.imooc.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.imooc.security.core.properties.SecurityConstants;
 import com.imooc.security.core.properties.SecurityProperties;
@@ -74,7 +74,7 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
 					securityProperties.getBrowser().getSignUpUrl(),
 					securityProperties.getBrowser().getSession().getSessionInvalidUrl(),
 					securityProperties.getBrowser().getSignOutUrl(),
-					"/user/regist")
+					"/user/regist", "/social/signUp")
 					.permitAll()
 				.anyRequest()
 				.authenticated()
