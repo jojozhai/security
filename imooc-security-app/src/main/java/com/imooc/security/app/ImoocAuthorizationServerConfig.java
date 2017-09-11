@@ -40,7 +40,8 @@ public class ImoocAuthorizationServerConfig extends AuthorizationServerConfigure
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.tokenStore(tokenStore).authenticationManager(authenticationManager)
+		endpoints.tokenStore(tokenStore)
+				.authenticationManager(authenticationManager)
 				.userDetailsService(userDetailsService);
 	}
 
@@ -49,8 +50,12 @@ public class ImoocAuthorizationServerConfig extends AuthorizationServerConfigure
 		InMemoryClientDetailsServiceBuilder builder = clients.inMemory();
 		if (ArrayUtils.isNotEmpty(securityProperties.getOauth2().getClients())) {
 			for (OAuth2ClientProperties client : securityProperties.getOauth2().getClients()) {
-				builder.withClient(client.getClientId()).secret(client.getClientSecret())
-						.accessTokenValiditySeconds(client.getAccessTokenValidateSeconds());
+				builder.withClient(client.getClientId())
+						.secret(client.getClientSecret())
+						.authorizedGrantTypes("refresh_token", "authorization_code", "password")
+						.accessTokenValiditySeconds(client.getAccessTokenValidateSeconds())
+						.refreshTokenValiditySeconds(2592000)
+						.scopes("all");
 			}
 		}
 	}
