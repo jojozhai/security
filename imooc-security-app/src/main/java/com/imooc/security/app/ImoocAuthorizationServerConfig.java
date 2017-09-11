@@ -30,57 +30,57 @@ import com.imooc.security.core.properties.SecurityProperties;
  */
 @Configuration
 @EnableAuthorizationServer
-public class ImoocAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-
-	@Autowired
-	private UserDetailsService userDetailsService;
-
-	@Autowired
-	private AuthenticationManager authenticationManager;
-
-	@Autowired
-	private TokenStore tokenStore;
-	
-	@Autowired(required = false)
-	private JwtAccessTokenConverter jwtAccessTokenConverter;
-	
-	@Autowired(required = false)
-	private TokenEnhancer jwtTokenEnhancer;
-
-	@Autowired
-	private SecurityProperties securityProperties;
-
-	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.tokenStore(tokenStore)
-				.authenticationManager(authenticationManager)
-				.userDetailsService(userDetailsService);
-		
-		if(jwtAccessTokenConverter != null && jwtTokenEnhancer != null){
-			TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
-			List<TokenEnhancer> enhancers = new ArrayList<>();
-			enhancers.add(jwtTokenEnhancer);
-			enhancers.add(jwtAccessTokenConverter);
-			enhancerChain.setTokenEnhancers(enhancers);
-			endpoints.tokenEnhancer(enhancerChain)
-						.accessTokenConverter(jwtAccessTokenConverter);
-		}
-		
-	}
-
-	@Override
-	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		InMemoryClientDetailsServiceBuilder builder = clients.inMemory();
-		if (ArrayUtils.isNotEmpty(securityProperties.getOauth2().getClients())) {
-			for (OAuth2ClientProperties client : securityProperties.getOauth2().getClients()) {
-				builder.withClient(client.getClientId())
-						.secret(client.getClientSecret())
-						.authorizedGrantTypes("refresh_token", "authorization_code", "password")
-						.accessTokenValiditySeconds(client.getAccessTokenValidateSeconds())
-						.refreshTokenValiditySeconds(2592000)
-						.scopes("all");
-			}
-		}
-	}
-
-}
+public class ImoocAuthorizationServerConfig{}// extends AuthorizationServerConfigurerAdapter {
+//
+//	@Autowired
+//	private UserDetailsService userDetailsService;
+//
+//	@Autowired
+//	private AuthenticationManager authenticationManager;
+//
+//	@Autowired
+//	private TokenStore tokenStore;
+//	
+//	@Autowired(required = false)
+//	private JwtAccessTokenConverter jwtAccessTokenConverter;
+//	
+//	@Autowired(required = false)
+//	private TokenEnhancer jwtTokenEnhancer;
+//
+//	@Autowired
+//	private SecurityProperties securityProperties;
+//
+//	@Override
+//	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+//		endpoints.tokenStore(tokenStore)
+//				.authenticationManager(authenticationManager)
+//				.userDetailsService(userDetailsService);
+//		
+//		if(jwtAccessTokenConverter != null && jwtTokenEnhancer != null){
+//			TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
+//			List<TokenEnhancer> enhancers = new ArrayList<>();
+//			enhancers.add(jwtTokenEnhancer);
+//			enhancers.add(jwtAccessTokenConverter);
+//			enhancerChain.setTokenEnhancers(enhancers);
+//			endpoints.tokenEnhancer(enhancerChain)
+//						.accessTokenConverter(jwtAccessTokenConverter);
+//		}
+//		
+//	}
+//
+//	@Override
+//	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+//		InMemoryClientDetailsServiceBuilder builder = clients.inMemory();
+//		if (ArrayUtils.isNotEmpty(securityProperties.getOauth2().getClients())) {
+//			for (OAuth2ClientProperties client : securityProperties.getOauth2().getClients()) {
+//				builder.withClient(client.getClientId())
+//						.secret(client.getClientSecret())
+//						.authorizedGrantTypes("refresh_token", "authorization_code", "password")
+//						.accessTokenValiditySeconds(client.getAccessTokenValidateSeconds())
+//						.refreshTokenValiditySeconds(2592000)
+//						.scopes("all");
+//			}
+//		}
+//	}
+//
+//}
