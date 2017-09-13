@@ -1,14 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.imooc.security</groupId>
-	<artifactId>imooc-security</artifactId>
+	<groupId>com.imooc.sso</groupId>
+	<artifactId>sso-demo</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<properties>
-		<imooc.security.version>1.0.0-SNAPSHOT</imooc.security.version>
-	</properties>
 
 	<dependencyManagement>
 		<dependencies>
@@ -43,11 +40,10 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<modules>
-		<module>../imooc-security-app</module>
-		<module>../imooc-security-browser</module>
-		<module>../imooc-security-core</module>
-		<module>../imooc-security-demo</module>
+		<module>../sso-client1</module>
+		<module>../sso-client2</module>
+		<module>../sso-server</module>
 	</modules>
 </project>
