@@ -17,7 +17,6 @@ import com.imooc.security.core.properties.SecurityProperties;
  *
  */
 @Component
-@Order(Integer.MIN_VALUE)
 public class ImoocAuthorizeConfigProvider implements AuthorizeConfigProvider {
 
 	@Autowired
