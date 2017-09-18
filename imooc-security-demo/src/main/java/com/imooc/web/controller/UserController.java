@@ -10,7 +10,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +31,8 @@ import org.springframework.web.context.request.ServletWebRequest;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.imooc.dto.User;
 import com.imooc.dto.UserQueryCondition;
-import com.imooc.security.app.social.AppSingUpUtils;
-import com.imooc.security.core.properties.SecurityProperties;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
@@ -55,19 +50,19 @@ public class UserController {
 	@Autowired
 	private ProviderSignInUtils providerSignInUtils;
 	
-	@Autowired
-	private AppSingUpUtils appSingUpUtils;
+//	@Autowired
+//	private AppSingUpUtils appSingUpUtils;
 	
-	@Autowired
-	private SecurityProperties securityProperties;
+//	@Autowired
+//	private SecurityProperties securityProperties;
 	
 	@PostMapping("/regist")
 	public void regist(User user, HttpServletRequest request) {
 		
 		//不管是注册用户还是绑定用户，都会拿到一个用户唯一标识。
 		String userId = user.getUsername();
-		//providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
-		appSingUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
+		providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
+//		appSingUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
 	}
 	
 	@GetMapping("/me")

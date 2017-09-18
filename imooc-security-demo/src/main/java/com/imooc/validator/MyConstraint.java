@@ -25,5 +25,7 @@ public @interface MyConstraint {
 	Class<?>[] groups() default { };
 
 	Class<? extends Payload>[] payload() default { };
+	
+	String field() default "";
 
 }
