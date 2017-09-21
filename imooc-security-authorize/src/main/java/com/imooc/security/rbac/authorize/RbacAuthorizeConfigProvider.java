@@ -13,7 +13,6 @@ import com.imooc.security.core.authorize.AuthorizeConfigProvider;
 
 /**
  * @author zhailiang
- *
  */
 @Component
 @Order(Integer.MAX_VALUE)
@@ -23,15 +22,16 @@ public class RbacAuthorizeConfigProvider implements AuthorizeConfigProvider {
 	 * @see com.imooc.security.core.authorize.AuthorizeConfigProvider#config(org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)
 	 */
 	@Override
-	public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
+	public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
 		config
-		.antMatchers(HttpMethod.GET, "/fonts/**").permitAll()
-		.antMatchers(HttpMethod.GET, 
-				"**/*.html",
-				"/admin/me",
-				"/resource").authenticated()
-		.anyRequest()
-			.access("@rbacService.hasPermission(request, authentication)");
+			.antMatchers(HttpMethod.GET, "/fonts/**").permitAll()
+			.antMatchers(HttpMethod.GET, 
+					"/**/*.html",
+					"/admin/me",
+					"/resource").authenticated()
+			.anyRequest()
+				.access("@rbacService.hasPermission(request, authentication)");
+		return true;
 	}
 
 }

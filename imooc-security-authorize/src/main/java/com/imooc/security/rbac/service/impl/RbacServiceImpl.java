@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.imooc.security.rbac;
+package com.imooc.security.rbac.service.impl;
 
 import java.util.Set;
 
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 
 import com.imooc.security.rbac.domain.Admin;
+import com.imooc.security.rbac.service.RbacService;
 
 /**
  * @author zhailiang

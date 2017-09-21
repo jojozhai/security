@@ -36,7 +36,7 @@ public class BrowserSecurityBeanConfig {
 	@Bean
 	@ConditionalOnMissingBean(InvalidSessionStrategy.class)
 	public InvalidSessionStrategy invalidSessionStrategy(){
-		return new ImoocInvalidSessionStrategy(securityProperties.getBrowser().getSession().getSessionInvalidUrl());
+		return new ImoocInvalidSessionStrategy(securityProperties);
 	}
 	
 	/**
@@ -46,7 +46,7 @@ public class BrowserSecurityBeanConfig {
 	@Bean
 	@ConditionalOnMissingBean(SessionInformationExpiredStrategy.class)
 	public SessionInformationExpiredStrategy sessionInformationExpiredStrategy(){
-		return new ImoocExpiredSessionStrategy(securityProperties.getBrowser().getSession().getSessionInvalidUrl());
+		return new ImoocExpiredSessionStrategy(securityProperties);
 	}
 	
 	/**

@@ -20,8 +20,9 @@ public class DemoAuthorizeConifgProvider implements AuthorizeConfigProvider {
 	 * @see com.imooc.security.core.authorize.AuthorizeConfigProvider#config(org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)
 	 */
 	@Override
-	public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
+	public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
 		//demo项目授权配置
+		return false;
 	}
 
 }

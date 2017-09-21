@@ -1,27 +1,33 @@
 /**
  * 
  */
-package com.imooc.security.core.authentication;
+package com.imooc.security.rbac.authentication;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.imooc.security.rbac.domain.Admin;
+import com.imooc.security.rbac.repository.AdminRepository;
 
 /**
- * 
- * 默认的 UserDetailsService 实现
- * 
- * 不做任何处理，只在控制台打印一句日志，然后抛出异常，提醒业务系统自己配置 UserDetailsService。
- * 
  * @author zhailiang
  *
  */
-public class DefaultUserDetailsService implements UserDetailsService {
+@Component
+@Transactional
+public class RbacUserDetailsService implements UserDetailsService {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
+	@Autowired
+	private AdminRepository adminRepository;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -30,8 +36,10 @@ public class DefaultUserDetailsService implements UserDetailsService {
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		logger.warn("请配置 UserDetailsService 接口的实现.");
-		throw new UsernameNotFoundException(username);
+		logger.info("表单登录用户名:" + username);
+		Admin admin = adminRepository.findByUsername(username);
+		admin.getUrls();
+		return admin;
 	}
 
 }

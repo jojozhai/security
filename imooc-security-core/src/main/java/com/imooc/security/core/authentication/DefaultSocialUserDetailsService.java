@@ -23,7 +23,7 @@ public class DefaultSocialUserDetailsService implements SocialUserDetailsService
 	
 	@Override
 	public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
-		logger.error("请配置 SocialUserDetailsService 接口的实现.");
+		logger.warn("请配置 SocialUserDetailsService 接口的实现.");
 		throw new UsernameNotFoundException(userId);
 	}
 

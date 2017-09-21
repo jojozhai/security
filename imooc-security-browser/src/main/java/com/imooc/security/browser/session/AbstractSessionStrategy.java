@@ -18,6 +18,7 @@ import org.springframework.security.web.util.UrlUtils;
 import org.springframework.util.Assert;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.imooc.security.core.properties.SecurityProperties;
 import com.imooc.security.core.support.SimpleResponse;
 
 /**
@@ -34,6 +35,10 @@ public class AbstractSessionStrategy {
 	 */
 	private String destinationUrl;
 	/**
+	 * 系统配置信息
+	 */
+	private SecurityProperties securityPropertie;
+	/**
 	 * 重定向策略
 	 */
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
@@ -48,10 +53,12 @@ public class AbstractSessionStrategy {
 	 * @param invalidSessionUrl
 	 * @param invalidSessionHtmlUrl
 	 */
-	public AbstractSessionStrategy(String invalidSessionUrl) {
+	public AbstractSessionStrategy(SecurityProperties securityPropertie) {
+		String invalidSessionUrl = securityPropertie.getBrowser().getSession().getSessionInvalidUrl();
 		Assert.isTrue(UrlUtils.isValidRedirectUrl(invalidSessionUrl), "url must start with '/' or with 'http(s)'");
 		Assert.isTrue(StringUtils.endsWithIgnoreCase(invalidSessionUrl, ".html"), "url must end with '.html'");
 		this.destinationUrl = invalidSessionUrl;
+		this.securityPropertie = securityPropertie;
 	}
 
 	/*
@@ -73,7 +80,12 @@ public class AbstractSessionStrategy {
 		String targetUrl;
 
 		if (StringUtils.endsWithIgnoreCase(sourceUrl, ".html")) {
-			targetUrl = destinationUrl;
+			if(StringUtils.equals(sourceUrl, securityPropertie.getBrowser().getSignInPage())
+					|| StringUtils.equals(sourceUrl, securityPropertie.getBrowser().getSignOutUrl())){
+				targetUrl = sourceUrl;
+			}else{
+				targetUrl = destinationUrl;
+			}
 			logger.info("跳转到:"+targetUrl);
 			redirectStrategy.sendRedirect(request, response, targetUrl);
 		} else {

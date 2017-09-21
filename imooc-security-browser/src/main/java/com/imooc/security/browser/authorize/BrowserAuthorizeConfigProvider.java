@@ -25,13 +25,14 @@ public class BrowserAuthorizeConfigProvider implements AuthorizeConfigProvider {
 	 * @see com.imooc.security.core.authorize.AuthorizeConfigProvider#config(org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)
 	 */
 	@Override
-	public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
+	public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
 		config.antMatchers(HttpMethod.GET, 
 			"/**/*.js",
 			"/**/*.css",
 			"/**/*.jpg",
 			"/**/*.png",
 			"/**/*.gif").permitAll();
+		return false;
 	}
 
 }

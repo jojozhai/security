@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.imooc.security.rbac;
+package com.imooc.security.rbac.service;
 
 import javax.servlet.http.HttpServletRequest;
 
