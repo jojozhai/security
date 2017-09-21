@@ -1,0 +1,35 @@
+<header class="viewFramework-topbar">
+    <div class="aliyun-console-topbar">
+        <div class="topbar-wrap topbar-clearfix">
+            <div class="topbar-head topbar-left">
+                <a href="index.html" target="_blank" class="topbar-logo topbar-left">
+                    <span class="">品质</span>
+                </a>
+                <a href="index.html" target="_self" class="topbar-home-link topbar-btn topbar-left">
+                    <span>管理控制台</span>
+                </a>
+            </div>
+            <div class="topbar-info topbar-right topbar-clearfix">
+                <div class="topbar-left topbar-user">
+                    <div class="dropdown topbar-info-item" ng-class="showPersonMenu?'open':''">
+                        <a class="dropdown-toggle topbar-btn" data-toggle="dropdown"
+                           ng-click="showPersonMenu = !showPersonMenu">
+                            <span title="">{{currentAdmin.loginId}}</span>
+                            <span class="icon-arrow-down"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- <li class="topbar-info-btn ng-scope">
+                                 <a href="javascript:;" ng-click="updatePassword()"><i class="fa fa-key fa-lg"></i><span class="m-left-xs">修改密码</span></a>&nbsp;
+                             </li>-->
+                            <li class="topbar-info-btn ng-scope">
+                                <a href="logout">
+                                    <i class="fa fa-power-off fa-lg"></i><span class="m-left-xs">退出</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

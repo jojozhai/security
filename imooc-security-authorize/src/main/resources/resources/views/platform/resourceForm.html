@@ -1,0 +1,50 @@
+<div class="smart-widget widget-dark-blue margin-md">
+	<div class="smart-widget-header">资源信息</div>
+	<div class="smart-widget-inner">
+	<div class="smart-widget-body" >
+		<form name="resourceForm" class="form-horizontal no-margin" id="type-constraint" data-validate="parsley" novalidate>
+			<div class="form-group"  ng-class="resourceForm.name.$invalid && resourceForm.name.$dirty ? 'has-error': ''">
+				<label class="control-label col-lg-3">名称:</label>
+				<div class="col-lg-9">
+					<input name="name" ng-model="resource.name" type="text" class="form-control input-sm" placeholder="名称" required>
+					<label class="control-label" ng-show="resourceForm.name.$invalid && resourceForm.name.$dirty">名称不能为空</label>
+				</div>
+			</div>
+			<div class="form-group" ng-class="resourceForm.type.$invalid && resourceForm.type.$dirty ? 'has-error': ''">
+				<label class="control-label col-lg-3">类型:</label>
+				<div class="col-lg-9">
+					<div>
+						<select name="type" ng-model="resource.type" ng-options="type.value as type.name for type in types" class="form-control input-sm" required>
+							<option></option>
+						</select>
+					</div>
+					<div>
+						<label class="control-label" ng-show="resourceForm.type.$invalid && resourceForm.type.$dirty">类型不能为空</label>
+					</div>
+				</div>
+			</div>
+			<div ng-if="resource.type == 'MENU'" class="form-group">
+				<label class="control-label col-lg-3">链接:</label>
+				<div class="col-lg-9">
+					<input name="link" ng-model="resource.link" type="text" class="form-control input-sm" placeholder="链接">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-lg-3">授权URL:</label>
+				<div class="col-lg-9">
+					<input name="url" ng-model="resource.url" type="text" class="form-control input-sm" placeholder="授权URL">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-lg-3">图标样式:</label>
+				<div class="col-lg-9">
+					<input name="icon" ng-model="resource.icon" type="text" class="form-control input-sm" placeholder="图标样式">
+				</div>
+			</div>
+			<div class="text-right m-top-md">
+				<button ng-click="save(resource)" class="btn btn-success btn-sm" ng-disabled="resourceForm.$invalid"><i class="fa fa-save m-right-xs"></i>保存</button>
+			</div>
+		</form>
+	</div>
+	</div>
+</div>

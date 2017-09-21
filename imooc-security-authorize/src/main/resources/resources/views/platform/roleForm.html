@@ -1,0 +1,19 @@
+<div class="smart-widget widget-dark-blue margin-md">
+	<div class="smart-widget-header">角色信息</div>
+	<div class="smart-widget-inner">
+	<div class="smart-widget-body" >
+		<form name="roleForm" class="form-horizontal no-margin" id="type-constraint" data-validate="parsley" novalidate>
+			<div class="form-group"  ng-class="roleForm.name.$invalid && roleForm.name.$dirty ? 'has-error': ''">
+				<label class="control-label col-lg-3">名称:</label>
+				<div class="col-lg-9">
+					<input name="name" ng-model="role.name" type="text" class="form-control input-sm" placeholder="名称" required>
+					<label class="control-label" ng-show="roleForm.name.$invalid && roleForm.name.$dirty">名称不能为空</label>
+				</div>
+			</div>
+			<div class="text-right m-top-md">
+				<button ng-click="save(role)" class="btn btn-success btn-sm" ng-disabled="roleForm.$invalid"><i class="fa fa-save m-right-xs"></i>保存</button>
+			</div>
+		</form>
+	</div>
+	</div>
+</div>

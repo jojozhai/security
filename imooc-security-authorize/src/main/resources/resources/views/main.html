@@ -1,0 +1,74 @@
+<div class="wrapper preload">
+	<!-- sidebar-right -->
+	<header class="top-nav">
+		<div class="top-nav-inner">
+			<div class="nav-header">
+				<button type="button" class="navbar-toggle pull-left sidebar-toggle"
+					id="sidebarToggleSM">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a href="index.html" class="brand"> <i class="fa fa-database"></i><span
+					class="brand-name">SIMPLIFY ADMIN</span>
+				</a>
+			</div>
+			<div class="nav-container">
+				<div class="pull-right m-right-sm">
+					<div class="user-block hidden-xs" ng-class="showPersonMenu?'open':''">
+						<a ng-click="showPersonMenu = !showPersonMenu; notificationBoxShow = false; messageBoxShow = false;" href="javascript:;" id="userToggle" data-toggle="dropdown"> 
+							<div class="user-detail inline-block">
+								{{currentAdmin.username}} 
+							</div>
+						</a>
+					</div>
+					<div  class="user-block" style="padding-top: 16px;">
+						<a href="javascript:;" ng-click="updatePassword()"><i class="fa fa-key fa-lg"></i><span class="m-left-xs">修改密码</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="/signOut"><i class="fa fa-power-off fa-lg"></i><span class="m-left-xs">退出</span></a>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- ./top-nav-inner -->
+	</header>
+	<aside class="sidebar-menu fixed">
+		<div class="sidebar-inner scrollable-sidebar">
+			<div class="main-menu">
+				<ul class="accordion">
+					<li class="menu-header">Main Menu</li>
+					
+					<li ng-repeat="menu in menus" class="bg-palette{{$index%4 + 1}}" ng-class="menu.open?'open':''">
+						<a href="javascript:;" ng-click="clickMenu(menu)">
+							<span class="menu-content block">
+								<span class="menu-icon">
+									<i class="block fa fa-{{menu.icon}} fa-lg"></i>
+								</span>
+								<span class="text m-left-sm">
+									{{menu.name}}
+								</span>
+								<span class="submenu-icon" ng-show="menu.children.length>0"></span>
+							</span>
+							<span class="menu-content-hover block"> {{menu.name}} </span>
+						</a>
+						<ul ng-if="menu.children.length > 0" class="submenu bg-{{$index%4 + 1}}" ng-style="menu.open?{'display': 'block'}:{'display': 'none'}">
+							<li ng-repeat="submenu in menu.children" ng-class="currentSubmenu.id == submenu.id ? 'active' : ''">
+								<a ui-sref="{{'index.'+submenu.link}}" ng-click="clickSubMenu(submenu)">
+									<span class="submenu-label">{{submenu.name}}</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="sidebar-fix-bottom clearfix">
+				<div class="user-dropdown dropup pull-left">
+				</div>
+				<a href="logout" class="pull-right font-18"><i class="ion-log-out"></i></a>
+			</div>
+		</div>
+		<!-- sidebar-inner -->
+	</aside>
+	<div class="main-container">
+		<div ui-view class="padding-md"></div>
+	</div>
+</div>

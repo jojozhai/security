@@ -25,7 +25,8 @@ public class ImoocAuthorizeConfigProvider implements AuthorizeConfigProvider {
 	
 	@Override
 	public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
-		config.antMatchers(
+		config
+			.antMatchers(
 				SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
 				SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
 				SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_OPENID,
@@ -34,7 +35,7 @@ public class ImoocAuthorizeConfigProvider implements AuthorizeConfigProvider {
 				securityProperties.getBrowser().getSignUpUrl(),
 				securityProperties.getBrowser().getSession().getSessionInvalidUrl(),
 				securityProperties.getBrowser().getSignOutUrl())
-		.permitAll();
+				.permitAll();
 	}
 
 }

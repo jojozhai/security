@@ -1,0 +1,16 @@
+<div class="viewFramework-body"
+     ng-class="{'viewFramework-sidebar-mini': isSidebarFold,'viewFramework-sidebar-full':!isSidebarFold}">
+    <!--侧边菜单-->
+    <aside ng-include="'views/commons/partials/sidebar.html'"></aside>
+    <div class="viewFramework-product"
+         ng-class="{'viewFramework-product-col-1': currentSubmenu.children.length > 0 && isProductNavBarFold}">
+        <!--内侧菜单-->
+        <aside ng-include="'views/commons/partials/offsidebar.html'"></aside>
+        <!--内容区-->
+        <div class="viewFramework-product-body">
+            <div>
+                <div class="console-container" ui-view></div>
+            </div>
+        </div>
+    </div>
+</div>

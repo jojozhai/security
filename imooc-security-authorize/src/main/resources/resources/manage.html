@@ -1,0 +1,71 @@
+<!doctype html>
+<html ng-app="adminApp">
+<head>
+<meta charset="utf-8">
+<title>Admin</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width">
+<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+<!-- build:css(.) styles/vendor.css -->
+<!-- bower:css -->
+<link rel="stylesheet" href="styles/bootstrap.min.css" />
+<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="styles/simplify.min.css">
+<link rel="stylesheet" href="styles/font-awesome.min.css" />
+<link rel="stylesheet" href="styles/ionicons.min.css" />
+<link rel="stylesheet" href="styles/tree-control.css" />
+<link rel="stylesheet" href="styles/tree-control-attribute.css" />
+<link rel="stylesheet" href="styles/toastr.min.css" />
+<link rel="stylesheet" href="styles/jquery.fileupload.css" />
+<link rel="stylesheet" href="styles/jquery.fileupload-ui.css" />
+<link rel="stylesheet" href="styles/blueimp-gallery.min.css" />
+<link rel="stylesheet" href="styles/select.min.css" />
+<!-- endbuild -->
+
+</head>
+<body class="overflow-hidden" ng-controller="mainCtrl">
+	<!--[if lte IE 8]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+	<!-- Add your site or application content here -->
+	<div ui-view></div>
+
+	<!-- build:js(.) scripts/vendor.js -->
+	<script src="scripts/framework/jquery.min.js"></script>
+	<script src="scripts/framework/jquery.slimscroll.min.js"></script>
+	<script src="scripts/framework/angular.min.js"></script>
+	<script src="scripts/framework/angular-animate.min.js"></script>
+	<script src="scripts/framework/angular-cookies.min.js"></script>
+	<script src="scripts/framework/angular-resource.min.js"></script>
+	<script src="scripts/framework/angular-sanitize.min.js"></script>
+	<script src="scripts/framework/angular-touch.min.js"></script>
+	<script src="scripts/framework/angular-ui-router.min.js"></script>
+	<script src="scripts/framework/angular-tree-control.js"></script>
+	<script src="scripts/framework/angular-locale_zh-cn.js"></script>
+	<script src="scripts/framework/ui-bootstrap.min.js"></script>
+	<script src="scripts/framework/ui-bootstrap-tpls.min.js"></script>
+	<script src="scripts/framework/simplify.js"></script>
+	<script src="scripts/framework/simplify_dashboard.js"></script>
+	<script src="scripts/framework/toastr.min.js"></script>
+	<script src="scripts/framework/canvas-to-blob.min.js"></script>
+	<script src="scripts/framework/jquery.blueimp-gallery.min.js"></script>
+	<script src="scripts/framework/load-image.all.min.js"></script>
+	<script src="scripts/framework/uploader.min.js"></script>
+	<script src="scripts/framework/tinymce.js"></script>
+	<script src="scripts/framework/tinymce.min.js"></script>
+	<script src="scripts/framework/select.min.js"></script>
+
+	<script src="scripts/app.js"></script>
+
+	<script src="scripts/commons/admin.js"></script>
+	<script src="scripts/commons/common.js"></script>
+
+	<script src="scripts/platform/module.js"></script>
+	<script src="scripts/platform/controller/adminController.js"></script>
+	<script src="scripts/platform/controller/roleController.js"></script>
+	<script src="scripts/platform/controller/resourceController.js"></script>
+
+</body>
+</html>

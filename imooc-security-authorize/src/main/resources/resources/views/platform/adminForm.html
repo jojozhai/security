@@ -1,0 +1,39 @@
+<div class="smart-widget widget-dark-blue margin-md">
+	<div class="smart-widget-header">管理员信息</div>
+	<div class="smart-widget-inner">
+	<div class="smart-widget-body" >
+		<form name="adminForm" class="form-horizontal no-margin" id="type-constraint" data-validate="parsley" novalidate>
+			<div class="form-group"  ng-class="adminForm.name.$invalid && adminForm.name.$dirty ? 'has-error': ''">
+				<label class="control-label col-lg-3">姓名:</label>
+				<div class="col-lg-9">
+					<input name="name" ng-model="admin.name" type="text" class="form-control input-sm" placeholder="姓名" required>
+					<label class="control-label" ng-show="adminForm.name.$invalid && adminForm.name.$dirty">姓名不能为空</label>
+				</div>
+			</div>
+			<div class="form-group" ng-class="adminForm.username.$invalid && adminForm.username.$dirty ? 'has-error': ''">
+				<label class="control-label col-lg-3">账号:</label>
+				<div class="col-lg-9">
+					<input name="username" ng-model="admin.username" type="text" class="form-control input-sm" placeholder="账号" required>
+					<label class="control-label" ng-show="adminForm.username.$invalid && adminForm.username.$dirty">账号不能为空</label>
+				</div>
+			</div>
+			<div class="form-group" ng-class="adminForm.roleId.$invalid && adminForm.roleId.$dirty ? 'has-error': ''">
+				<label class="control-label col-lg-3">角色:</label>
+				<div class="col-lg-9">
+					<div>
+						<select name="roleId" ng-model="admin.roleId" ng-options="role.id as role.name for role in roles" class="form-control input-sm" required>
+							<option></option>
+						</select>
+					</div>
+					<div>
+						<label class="control-label" ng-show="adminForm.roleId.$invalid && adminForm.roleId.$dirty">角色不能为空</label>
+					</div>
+				</div>
+			</div>
+			<div class="text-right m-top-md">
+				<button ng-click="save(admin)" class="btn btn-success btn-sm" ng-disabled="adminForm.$invalid"><i class="fa fa-save m-right-xs"></i>保存</button>
+			</div>
+		</form>
+	</div>
+	</div>
+</div>

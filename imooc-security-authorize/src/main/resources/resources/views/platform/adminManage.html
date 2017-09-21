@@ -1,0 +1,77 @@
+<div class="smart-widget widget-dark-blue">
+	<div class="smart-widget-header">管理员管理</div>
+	<div class="smart-widget-inner">
+		<div class="smart-widget-body">
+			<button ng-click="create()" class="btn btn-success btn-sm">
+				<i class="ion-plus m-right-xs"></i>新建管理员
+			</button>
+			<button type="button" class="btn btn-success btn-sm" ng-click="isConditionCollapsed = !isConditionCollapsed">
+				<i class="fa fa-search m-right-xs"></i>查询
+			</button>
+		</div>
+		<div uib-collapse="isConditionCollapsed" style="padding-left: 20px;padding-right: 20px;">
+			<div class="panel">
+				<div class="panel-body">
+					<div style="float:right; margin-top: 7px;">
+						<a href="javascript:" ng-click="isConditionCollapsed = !isConditionCollapsed" class="widget-remove-option"><i class="fa fa-times"></i></a>
+					</div>
+					<div>
+					<form class="form-inline no-margin" novalidate>
+						<div class="form-group">
+								<input ng-model="condition.name" type="text" class="form-control input-sm" placeholder="用户名">
+						</div>
+						<!-- <div class="form-group">
+								<input ng-model="condition.username" type="text" class="form-control input-sm" placeholder="账号">
+						</div>
+						<div class="form-group">
+								<label class="control-label">角色:</label>
+								<select ng-model="condition.roleId" ng-options="role.id as role.name for role in roles" class="form-control input-sm">
+									<option></option>
+								</select>
+						</div> -->
+						<button ng-click="queryAdmin(condition)" class="btn btn-sm btn-success"><i class="fa fa-search m-right-xs"></i>查询</button>
+						<button ng-click="cleanCondition()" class="btn btn-sm btn-warning"><i class="ion-close m-right-xs"></i>清空</button>
+					</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-show="pageInfo.totalElements > 0">
+			<div class="smart-widget-body">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th width="100">序号</th>
+							<th>账号</th>
+							<th width="200">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat = "admin in admins">
+							<td>{{$index+1}}</td>
+							<td>{{admin.username}}</td>
+							<td>
+								<button class="btn btn-warning btn-xs" ng-click="update(admin)">
+									<i class="ion-edit m-right-xs"></i>修改
+								</button>
+								<button class="btn btn-danger btn-xs" ng-click="remove(admin)">
+									<i class="ion-trash-a m-right-xs"></i>删除
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div style="margin-top: -30px; margin-left: 20px; margin-bottom: 20px;">
+				<uib-pagination total-items="pageInfo.totalElements" num-pages="pageInfo.totalPages" ng-model="pageInfo.page" max-size="pageInfo.maxSize" 
+					class="pagination-sm" boundary-links="true" force-ellipses="true" ng-change="changePage()" ng-disabled="pageInfo.totalElements <= 0" 
+					first-text="首页" last-text="末页" next-text="后页" previous-text="前页"></uib-pagination>
+			</div>
+		</div>
+		<div class="smart-widget-body" ng-hide="pageInfo.totalElements > 0">
+			<div class="alert alert-warning alert-dismissible" role="alert">
+		     	<i class="fa fa-exclamation-circle m-right-xs"></i> <strong>没有查询到任何数据,请修改查询条件并重试</strong>
+		    </div>
+		</div>
+	</div>
+</div>

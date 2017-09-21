@@ -1,0 +1,29 @@
+<div class="viewFramework-product-navbar">
+    <div class="product-nav-stage product-nav-stage-main">
+        <div class="product-nav-scene product-nav-main-scene">
+            <div class="product-nav-title" id="nav-title">{{currentSubmenu.name}}</div>
+            <div class="product-nav-list">
+                <ul>
+                    <li class="" ng-repeat="currentmenu in currentSubmenu.children">
+                        <div>
+                            <a ui-sref="{{'index.'+currentmenu.link}}">
+                                <div class="nav-icon"></div>
+                                <div class="nav-title">{{currentmenu.name}}</div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="viewFramework-product-navbar-collapse" ng-click="collapseProductNavbar()"
+     ng-if="currentSubmenu.children.length > 0">
+    <div class="product-navbar-collapse-inner">
+        <div class="product-navbar-collapse-bg"></div>
+        <div class="product-navbar-collapse">
+            <span class="icon-collapse-left"></span>
+            <span class="icon-collapse-right"></span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<style>
+	.modal-dialog {
+    	width: 400px;
+    	margin:50px auto;
+	}
+</style>
+<div class="modal-header">
+	<h4 class="modal-title">{{title}}</h4>
+</div>
+<div class="modal-body" ng-show="message != null">
+    {{message}}
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" type="button" ng-click="ok()">确认</button>
+	<button class="btn btn-default" type="button" ng-click="cancel()">取消</button>
+</div>

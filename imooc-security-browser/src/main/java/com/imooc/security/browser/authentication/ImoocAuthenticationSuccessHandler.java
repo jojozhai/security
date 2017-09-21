@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.imooc.security.core.properties.LoginResponseType;
 import com.imooc.security.core.properties.SecurityProperties;
+import com.imooc.security.core.support.SimpleResponse;
 
 /**
  * @author zhailiang
@@ -51,7 +52,7 @@ public class ImoocAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
 
 		if (LoginResponseType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
 			response.setContentType("application/json;charset=UTF-8");
-			response.getWriter().write(objectMapper.writeValueAsString(authentication));
+			response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse("FORM")));
 		} else {
 			super.onAuthenticationSuccess(request, response, authentication);
 		}

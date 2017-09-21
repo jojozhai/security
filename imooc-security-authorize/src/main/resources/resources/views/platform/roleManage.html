@@ -1,0 +1,47 @@
+<div class="row">
+	<div class="col-lg-4">
+		<div class="smart-widget widget-dark-blue">
+			<div class="smart-widget-header">
+				角色列表
+			</div>
+			<div class="smart-widget-inner">
+				<div class="smart-widget-body clearfix">
+					<div class="search-input pull-left">
+						<input ng-model="key" type="text" class="form-control input-sm">
+						<a href="#" class="input-icon text-normal"><i class="fa fa-search"></i></a>
+					</div>
+					<button ng-click="create()" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus m-right-xs"></i>新建角色</button>
+				</div>
+				<div class="list-group no-border"  style="height: {{panelHeight}}px; overflow: auto;">
+					<a href="javascript:;" ng-repeat="role in roles | filter: {name:key}" class="list-group-item" ng-click="selectRole(role)" ng-style="role.selected?{'background-color': '#f5f5f5'}:{}">
+						{{role.name}}
+						<div class="pull-right">
+							<button class="btn btn-warning btn-xs" ng-click="update(role)">
+								<i class="ion-edit"></i>
+							</button>
+							<button class="btn btn-danger btn-xs" ng-click="remove(role)" style="width: 23px;">
+								<i class="ion-trash-a"></i>
+							</button>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-lg-8">
+		<div class="smart-widget widget-dark-blue">
+			<div class="smart-widget-header">权限信息</div>
+			<div class="smart-widget-inner">
+				<div class="overflow-hidden" style="height: {{panelHeight + 59}}px; overflow: auto;">
+					<treecontrol tree-model="treedata" options="treeOptions" expanded-nodes="expandedNodes">
+						<div class="custom-checkbox todo-checkbox">
+							<input ng-model="menuChecked" ng-checked="node.checked" ng-click="checkNode(node.id, menuChecked)" type="checkbox" id="{{node.id}}" >
+							<label for="{{node.id}}" style="margin-top: 4px;"></label>
+						</div>{{node.name}}
+					</treecontrol>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

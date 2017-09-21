@@ -1,0 +1,33 @@
+<div class="viewFramework-sidebar">
+    <!-- sidebar -->
+    <div class="sidebar-content">
+        <div class="sidebar-inner">
+            <div class="sidebar-fold icon-unfold"
+                 ng-class="{'icon-unfold': !isSidebarFold,'icon-fold':isSidebarFold}"
+                 ng-click="toggleSidebarStatus()"></div>
+            <div ng-repeat="menu in menus" class="sidebar-nav main-nav"
+                 ng-class="menu.open?'sidebar-nav-fold':''">
+                <div class="sidebar-title" ng-click="clickMenu(menu)">
+                    <div class="sidebar-title-inner" tooltip-append-to-body="true" tooltip-placement="right"
+                         uib-tooltip="{{isSidebarFold ? menu.name : ''}}">
+                        <span class="sidebar-title-icon icon-arrow-down"></span>
+                        <span class="sidebar-title-text">{{menu.name}}</span>
+                        <span class="sidebar-manage"><a class="icon-setup"></a></span>
+                    </div>
+                </div>
+                <ul class="sidebar-trans" ng-if="menu.children.length > 0">
+                    <li class="nav-item" tooltip-append-to-body="true" tooltip-placement="right"
+                        uib-tooltip="{{isSidebarFold ? submenu.name : ''}}" ng-repeat="submenu in menu.children"
+                        ng-class="getMenuItemPropClasses(submenu)">
+                        <a ng-click="clickSubMenu(submenu)">
+                            <div class="nav-icon" style="width:50px;height:40px;">
+                                <span class="icon-{{submenu.icon}}"></span>
+                            </div>
+                            <span class="nav-title">{{submenu.name}}&nbsp;</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
