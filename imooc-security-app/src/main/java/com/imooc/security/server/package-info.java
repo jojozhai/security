@@ -5,4 +5,4 @@
  * @author zhailiang
  *
  */
-package com.imooc.security.app.jwt;
+package com.imooc.security.server;

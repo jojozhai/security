@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.imooc.security.app;
+package com.imooc.security.server;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +26,8 @@ import com.imooc.security.core.properties.OAuth2ClientProperties;
 import com.imooc.security.core.properties.SecurityProperties;
 
 /**
+ * 认证服务器配置
+ * 
  * @author zhailiang
  *
  */
@@ -51,9 +53,13 @@ public class ImoocAuthorizationServerConfig extends AuthorizationServerConfigure
 	@Autowired
 	private SecurityProperties securityProperties;
 
+	/**
+	 * 认证及token配置
+	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.tokenStore(tokenStore).authenticationManager(authenticationManager)
+		endpoints.tokenStore(tokenStore)
+				.authenticationManager(authenticationManager)
 				.userDetailsService(userDetailsService);
 
 		if (jwtAccessTokenConverter != null && jwtTokenEnhancer != null) {
@@ -62,27 +68,32 @@ public class ImoocAuthorizationServerConfig extends AuthorizationServerConfigure
 			enhancers.add(jwtTokenEnhancer);
 			enhancers.add(jwtAccessTokenConverter);
 			enhancerChain.setTokenEnhancers(enhancers);
-
 			endpoints.tokenEnhancer(enhancerChain).accessTokenConverter(jwtAccessTokenConverter);
 		}
 
 	}
 
+	/**
+	 * tokenKey的访问权限表达式配置
+	 */
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		security.tokenKeyAccess("permitAll()")
-				.checkTokenAccess("isAuthenticated()")
-				.allowFormAuthenticationForClients();
+		security.tokenKeyAccess("permitAll()");
 	}
 
+	/**
+	 * 客户端配置
+	 */
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		InMemoryClientDetailsServiceBuilder builder = clients.inMemory();
 		if (ArrayUtils.isNotEmpty(securityProperties.getOauth2().getClients())) {
 			for (OAuth2ClientProperties client : securityProperties.getOauth2().getClients()) {
-				builder.withClient(client.getClientId()).secret(client.getClientSecret())
+				builder.withClient(client.getClientId())
+						.secret(client.getClientSecret())
 						.authorizedGrantTypes("refresh_token", "authorization_code", "password")
 						.accessTokenValiditySeconds(client.getAccessTokenValidateSeconds())
-						.refreshTokenValiditySeconds(2592000).scopes("all");
+						.refreshTokenValiditySeconds(2592000)
+						.scopes("all");
 			}
 		}
 	}

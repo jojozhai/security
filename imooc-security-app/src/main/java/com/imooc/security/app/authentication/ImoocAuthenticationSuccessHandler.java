@@ -29,9 +29,10 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.imooc.security.core.properties.SecurityProperties;
 
 /**
+ * APP环境下认证成功处理器
+ * 
  * @author zhailiang
  *
  */
@@ -42,9 +43,6 @@ public class ImoocAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
 
 	@Autowired
 	private ObjectMapper objectMapper;
-
-	@Autowired
-	private SecurityProperties securityProperties;
 
 	@Autowired
 	private ClientDetailsService clientDetailsService;

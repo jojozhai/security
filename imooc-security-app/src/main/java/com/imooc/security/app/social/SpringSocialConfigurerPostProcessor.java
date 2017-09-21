@@ -1,14 +1,15 @@
 /**
  * 
  */
-package com.imooc.security.app;
+package com.imooc.security.app.social;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
-import com.imooc.security.core.social.ImoocSpringSocialConfigurer;
+import com.imooc.security.core.properties.SecurityConstants;
+import com.imooc.security.core.social.support.ImoocSpringSocialConfigurer;
 
 /**
  * @author zhailiang
@@ -32,7 +33,7 @@ public class SpringSocialConfigurerPostProcessor implements BeanPostProcessor {
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 		if(StringUtils.equals(beanName, "imoocSocialSecurityConfig")){
 			ImoocSpringSocialConfigurer config = (ImoocSpringSocialConfigurer)bean;
-			config.signupUrl("/social/signUp");
+			config.signupUrl(SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL);
 			return config;
 		}
 		return bean;

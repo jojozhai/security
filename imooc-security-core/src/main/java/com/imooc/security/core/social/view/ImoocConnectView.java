@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.imooc.security.core.social;
+package com.imooc.security.core.social.view;
 
 import java.util.Map;
 
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.view.AbstractView;
 
 /**
+ * 绑定结果视图
  * @author zhailiang
  *
  */

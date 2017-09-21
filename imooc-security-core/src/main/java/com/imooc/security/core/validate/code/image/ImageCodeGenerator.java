@@ -17,6 +17,7 @@ import com.imooc.security.core.properties.SecurityProperties;
 import com.imooc.security.core.validate.code.ValidateCodeGenerator;
 
 /**
+ * 默认的图片验证码生成器
  * @author zhailiang
  *
  */

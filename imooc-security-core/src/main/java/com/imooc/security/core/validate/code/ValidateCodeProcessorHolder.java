@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * 校验码处理器管理器
+ * 
  * @author zhailiang
  *
  */
@@ -18,10 +20,18 @@ public class ValidateCodeProcessorHolder {
 	@Autowired
 	private Map<String, ValidateCodeProcessor> validateCodeProcessors;
 
+	/**
+	 * @param type
+	 * @return
+	 */
 	public ValidateCodeProcessor findValidateCodeProcessor(ValidateCodeType type) {
 		return findValidateCodeProcessor(type.toString().toLowerCase());
 	}
 
+	/**
+	 * @param type
+	 * @return
+	 */
 	public ValidateCodeProcessor findValidateCodeProcessor(String type) {
 		String name = type.toLowerCase() + ValidateCodeProcessor.class.getSimpleName();
 		ValidateCodeProcessor processor = validateCodeProcessors.get(name);

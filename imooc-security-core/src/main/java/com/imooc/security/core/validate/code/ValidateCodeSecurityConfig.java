@@ -13,6 +13,8 @@ import org.springframework.security.web.authentication.preauth.AbstractPreAuthen
 import org.springframework.stereotype.Component;
 
 /**
+ * 校验码相关安全配置
+ * 
  * @author zhailiang
  *
  */

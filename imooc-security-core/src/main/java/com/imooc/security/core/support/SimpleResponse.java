@@ -4,6 +4,8 @@
 package com.imooc.security.core.support;
 
 /**
+ * 简单响应的封装类
+ * 
  * @author zhailiang
  *
  */

@@ -16,6 +16,8 @@ import org.springframework.util.Assert;
 import com.imooc.security.core.properties.SecurityConstants;
 
 /**
+ * 短信登录过滤器
+ * 
  * @author zhailiang
  *
  */
@@ -30,7 +32,7 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
 	// ===================================================================================================
 
 	public SmsCodeAuthenticationFilter() {
-		super(new AntPathRequestMatcher(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE, "POST"));
+		super(new AntPathRequestMatcher(SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE, "POST"));
 	}
 
 	// ~ Methods

@@ -4,6 +4,8 @@
 package com.imooc.security.core.validate.code.sms;
 
 /**
+ * 默认的短信验证码发送器
+ * 
  * @author zhailiang
  *
  */

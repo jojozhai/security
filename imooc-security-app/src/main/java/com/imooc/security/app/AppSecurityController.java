@@ -15,14 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import com.imooc.security.app.social.AppSingUpUtils;
-import com.imooc.security.core.support.SocialUserInfo;
+import com.imooc.security.core.properties.SecurityConstants;
+import com.imooc.security.core.social.SocialController;
+import com.imooc.security.core.social.support.SocialUserInfo;
 
 /**
  * @author zhailiang
  *
  */
 @RestController
-public class AppSecurityController {
+public class AppSecurityController extends SocialController {
 	
 	@Autowired
 	private ProviderSignInUtils providerSignInUtils;
@@ -30,19 +32,17 @@ public class AppSecurityController {
 	@Autowired
 	private AppSingUpUtils appSingUpUtils;
 	
-	@GetMapping("/social/signUp")
+	/**
+	 * 需要注册时跳到这里，返回401和用户信息给前端
+	 * @param request
+	 * @return
+	 */
+	@GetMapping(SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL)
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
-		SocialUserInfo userInfo = new SocialUserInfo();
 		Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
-		userInfo.setProviderId(connection.getKey().getProviderId());
-		userInfo.setProviderUserId(connection.getKey().getProviderUserId());
-		userInfo.setNickname(connection.getDisplayName());
-		userInfo.setHeadimg(connection.getImageUrl());
-		
 		appSingUpUtils.saveConnectionData(new ServletWebRequest(request), connection.createData());
-		
-		return userInfo;
+		return buildSocialUserInfo(connection);
 	}
 
 }

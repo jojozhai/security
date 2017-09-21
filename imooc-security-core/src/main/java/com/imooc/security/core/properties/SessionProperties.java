@@ -4,6 +4,8 @@
 package com.imooc.security.core.properties;
 
 /**
+ * session管理相关配置项
+ * 
  * @author zhailiang
  *
  */

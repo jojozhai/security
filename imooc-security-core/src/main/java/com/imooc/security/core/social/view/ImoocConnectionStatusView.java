@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.imooc.security.core.social;
+package com.imooc.security.core.social.view;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +19,7 @@ import org.springframework.web.servlet.view.AbstractView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
+ * 社交账号绑定状态视图
  * @author zhailiang
  *
  */

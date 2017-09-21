@@ -13,6 +13,8 @@ import com.imooc.security.core.validate.code.ValidateCode;
 import com.imooc.security.core.validate.code.ValidateCodeGenerator;
 
 /**
+ * 短信验证码生成器
+ * 
  * @author zhailiang
  *
  */

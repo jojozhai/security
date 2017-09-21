@@ -48,15 +48,13 @@ public class ImoocAuthenctiationFailureHandler extends SimpleUrlAuthenticationFa
 		
 		logger.info("登录失败");
 		
-		if (LoginResponseType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
-			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		if (LoginResponseType.JSON.equals(securityProperties.getBrowser().getSignInResponseType())) {
+			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(exception.getMessage())));
 		}else{
 			super.onAuthenticationFailure(request, response, exception);
 		}
 		
-		
 	}
-
 }

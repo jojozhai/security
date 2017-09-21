@@ -13,6 +13,8 @@ import com.imooc.security.core.properties.SecurityConstants;
 import com.imooc.security.core.properties.SecurityProperties;
 
 /**
+ * 核心模块的授权配置提供器，安全模块涉及的url的授权配置在这里。
+ * 
  * @author zhailiang
  *
  */
@@ -28,10 +30,10 @@ public class ImoocAuthorizeConfigProvider implements AuthorizeConfigProvider {
 		config
 			.antMatchers(
 				SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
-				SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
-				SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_OPENID,
-				securityProperties.getBrowser().getLoginPage(),
+				SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE,
+				SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_OPENID,
 				SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/*",
+				securityProperties.getBrowser().getSignInPage(),
 				securityProperties.getBrowser().getSignUpUrl(),
 				securityProperties.getBrowser().getSession().getSessionInvalidUrl(),
 				securityProperties.getBrowser().getSignOutUrl())

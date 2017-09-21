@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 import org.springframework.stereotype.Component;
 
 /**
+ * 默认的授权配置管理器
+ * 
  * @author zhailiang
  *
  */

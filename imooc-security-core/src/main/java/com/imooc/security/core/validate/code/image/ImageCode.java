@@ -10,6 +10,7 @@ import com.imooc.security.core.validate.code.ValidateCode;
 
 
 /**
+ * 图片验证码
  * @author zhailiang
  *
  */

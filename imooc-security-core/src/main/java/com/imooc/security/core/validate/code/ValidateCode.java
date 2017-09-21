@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 
 
 /**
+ * 验证码信息封装类
+ * 
  * @author zhailiang
  *
  */

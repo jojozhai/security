@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.imooc.security.core.support;
+package com.imooc.security.core.social.support;
 
 /**
  * @author zhailiang

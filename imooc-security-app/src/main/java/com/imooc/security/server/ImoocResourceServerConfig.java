@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.imooc.security.app;
+package com.imooc.security.server;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -13,13 +13,14 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.social.security.SpringSocialConfigurer;
 
 import com.imooc.security.app.authentication.openid.OpenIdAuthenticationSecurityConfig;
+import com.imooc.security.core.authentication.FormAuthenticationConfig;
 import com.imooc.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.imooc.security.core.authorize.AuthorizeConfigManager;
-import com.imooc.security.core.properties.SecurityConstants;
-import com.imooc.security.core.properties.SecurityProperties;
 import com.imooc.security.core.validate.code.ValidateCodeSecurityConfig;
 
 /**
+ * 资源服务器配置
+ * 
  * @author zhailiang
  *
  */
@@ -46,19 +47,15 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
 	private SpringSocialConfigurer imoocSocialSecurityConfig;
 	
 	@Autowired
-	private SecurityProperties securityProperties;
+	private AuthorizeConfigManager authorizeConfigManager;
 	
 	@Autowired
-	private AuthorizeConfigManager authorizeConfigManager;
+	private FormAuthenticationConfig formAuthenticationConfig;
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		
-		http.formLogin()
-			.loginPage(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)
-			.loginProcessingUrl(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM)
-			.successHandler(imoocAuthenticationSuccessHandler)
-			.failureHandler(imoocAuthenticationFailureHandler);
+		formAuthenticationConfig.configure(http);
 		
 		http.apply(validateCodeSecurityConfig)
 				.and()

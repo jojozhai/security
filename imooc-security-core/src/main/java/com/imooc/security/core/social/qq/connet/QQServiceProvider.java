@@ -25,6 +25,9 @@ public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQ> {
 		this.appId = appId;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.springframework.social.oauth2.AbstractOAuth2ServiceProvider#getApi(java.lang.String)
+	 */
 	@Override
 	public QQ getApi(String accessToken) {
 		return new QQImpl(accessToken, appId);

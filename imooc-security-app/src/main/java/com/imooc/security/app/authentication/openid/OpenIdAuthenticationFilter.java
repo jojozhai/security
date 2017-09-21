@@ -16,6 +16,8 @@ import org.springframework.util.Assert;
 import com.imooc.security.core.properties.SecurityConstants;
 
 /**
+ * openId
+ * 
  * @author zhailiang
  *
  */
@@ -31,7 +33,7 @@ public class OpenIdAuthenticationFilter extends AbstractAuthenticationProcessing
 	// ===================================================================================================
 
 	public OpenIdAuthenticationFilter() {
-		super(new AntPathRequestMatcher(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_OPENID, "POST"));
+		super(new AntPathRequestMatcher(SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_OPENID, "POST"));
 	}
 
 	// ~ Methods

@@ -27,6 +27,9 @@ public class QQOAuth2Template extends OAuth2Template {
 		setUseParametersForClientAuthentication(true);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.springframework.social.oauth2.OAuth2Template#postForAccessGrant(java.lang.String, org.springframework.util.MultiValueMap)
+	 */
 	@Override
 	protected AccessGrant postForAccessGrant(String accessTokenUrl, MultiValueMap<String, String> parameters) {
 		String responseStr = getRestTemplate().postForObject(accessTokenUrl, parameters, String.class);
@@ -42,6 +45,9 @@ public class QQOAuth2Template extends OAuth2Template {
 		return new AccessGrant(accessToken, null, refreshToken, expiresIn);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.springframework.social.oauth2.OAuth2Template#createRestTemplate()
+	 */
 	@Override
 	protected RestTemplate createRestTemplate() {
 		RestTemplate restTemplate = super.createRestTemplate();

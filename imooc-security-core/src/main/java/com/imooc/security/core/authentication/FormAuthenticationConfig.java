@@ -12,11 +12,12 @@ import org.springframework.stereotype.Component;
 import com.imooc.security.core.properties.SecurityConstants;
 
 /**
+ * 表单登录配置
+ * 
  * @author zhailiang
- *
  */
 @Component
-public class FormLoginSecurityConfig {
+public class FormAuthenticationConfig {
 
 	@Autowired
 	protected AuthenticationSuccessHandler imoocAuthenticationSuccessHandler;
@@ -27,7 +28,7 @@ public class FormLoginSecurityConfig {
 	public void configure(HttpSecurity http) throws Exception {
 		http.formLogin()
 			.loginPage(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)
-			.loginProcessingUrl(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM)
+			.loginProcessingUrl(SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_FORM)
 			.successHandler(imoocAuthenticationSuccessHandler)
 			.failureHandler(imoocAuthenticationFailureHandler);
 	}

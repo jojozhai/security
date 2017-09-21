@@ -19,6 +19,7 @@ import com.imooc.security.core.validate.code.ValidateCodeRepository;
 import com.imooc.security.core.validate.code.ValidateCodeType;
 
 /**
+ * 抽象的图片验证码处理器
  * @author zhailiang
  *
  */

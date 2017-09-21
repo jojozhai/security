@@ -6,6 +6,9 @@ package com.imooc.security.core.validate.code;
 import com.imooc.security.core.properties.SecurityConstants;
 
 /**
+ * 
+ * 校验码类型
+ * 
  * @author zhailiang
  *
  */

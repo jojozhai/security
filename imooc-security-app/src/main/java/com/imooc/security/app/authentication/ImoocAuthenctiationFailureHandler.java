@@ -18,11 +18,11 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.imooc.security.core.properties.LoginResponseType;
-import com.imooc.security.core.properties.SecurityProperties;
 import com.imooc.security.core.support.SimpleResponse;
 
 /**
+ * APP环境下认证失败处理器
+ * 
  * @author zhailiang
  *
  */
@@ -34,10 +34,6 @@ public class ImoocAuthenctiationFailureHandler extends SimpleUrlAuthenticationFa
 	@Autowired
 	private ObjectMapper objectMapper;
 	
-	@Autowired
-	private SecurityProperties securityProperties;
-
-	
 	/* (non-Javadoc)
 	 * @see org.springframework.security.web.authentication.AuthenticationFailureHandler#onAuthenticationFailure(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, org.springframework.security.core.AuthenticationException)
 	 */
@@ -47,14 +43,9 @@ public class ImoocAuthenctiationFailureHandler extends SimpleUrlAuthenticationFa
 		
 		logger.info("登录失败");
 		
-		if (LoginResponseType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
-			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-			response.setContentType("application/json;charset=UTF-8");
-			response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(exception.getMessage())));
-		}else{
-			super.onAuthenticationFailure(request, response, exception);
-		}
-		
+		response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(exception.getMessage())));
 		
 	}
 

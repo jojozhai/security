@@ -15,6 +15,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.stereotype.Component;
 
 /**
+ * 短信登录配置
+ * 
  * @author zhailiang
  *
  */
@@ -30,6 +32,9 @@ public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapt
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
+	/* (non-Javadoc)
+	 * @see org.springframework.security.config.annotation.SecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.SecurityBuilder)
+	 */
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		

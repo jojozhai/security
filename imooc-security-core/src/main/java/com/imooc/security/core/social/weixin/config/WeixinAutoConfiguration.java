@@ -14,7 +14,7 @@ import org.springframework.web.servlet.View;
 
 import com.imooc.security.core.properties.SecurityProperties;
 import com.imooc.security.core.properties.WeixinProperties;
-import com.imooc.security.core.social.ImoocConnectView;
+import com.imooc.security.core.social.view.ImoocConnectView;
 import com.imooc.security.core.social.weixin.connect.WeixinConnectionFactory;
 
 /**

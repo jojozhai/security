@@ -18,7 +18,7 @@ import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.social.security.SpringSocialConfigurer;
 
-import com.imooc.security.core.authentication.FormLoginSecurityConfig;
+import com.imooc.security.core.authentication.FormAuthenticationConfig;
 import com.imooc.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.imooc.security.core.authorize.AuthorizeConfigManager;
 import com.imooc.security.core.properties.SecurityProperties;
@@ -64,12 +64,12 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 	private AuthorizeConfigManager authorizeConfigManager;
 	
 	@Autowired
-	private FormLoginSecurityConfig formLoginSecurityConfig;
+	private FormAuthenticationConfig formAuthenticationConfig;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		formLoginSecurityConfig.configure(http);
+		formAuthenticationConfig.configure(http);
 		
 		http.apply(validateCodeSecurityConfig)
 				.and()
@@ -77,6 +77,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.apply(imoocSocialSecurityConfig)
 				.and()
+			//记住我配置，如果想在'记住我'登录时记录日志，可以注册一个InteractiveAuthenticationSuccessEvent事件的监听器
 			.rememberMe()
 				.tokenRepository(persistentTokenRepository())
 				.tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
@@ -100,6 +101,10 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 	}
 
+	/**
+	 * 记住我功能的token存取器配置
+	 * @return
+	 */
 	@Bean
 	public PersistentTokenRepository persistentTokenRepository() {
 		JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();

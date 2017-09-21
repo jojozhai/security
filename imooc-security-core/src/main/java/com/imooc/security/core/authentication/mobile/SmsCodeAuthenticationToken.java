@@ -10,6 +10,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 
 /**
+ * 短信登录验证信息封装类
+ * 
  * @author zhailiang
  *
  */

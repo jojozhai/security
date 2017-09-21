@@ -15,6 +15,8 @@ import org.springframework.web.context.request.ServletWebRequest;
 import com.imooc.security.core.properties.SecurityConstants;
 
 /**
+ * 生成校验码的请求处理器
+ * 
  * @author zhailiang
  *
  */
