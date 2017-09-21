@@ -23,6 +23,8 @@ import com.imooc.security.core.properties.SecurityProperties;
 import com.imooc.security.core.support.SimpleResponse;
 
 /**
+ * 浏览器环境下登录失败的处理器
+ * 
  * @author zhailiang
  *
  */
@@ -36,7 +38,6 @@ public class ImoocAuthenctiationFailureHandler extends SimpleUrlAuthenticationFa
 	
 	@Autowired
 	private SecurityProperties securityProperties;
-
 	
 	/* (non-Javadoc)
 	 * @see org.springframework.security.web.authentication.AuthenticationFailureHandler#onAuthenticationFailure(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, org.springframework.security.core.AuthenticationException)

@@ -32,6 +32,8 @@ import com.imooc.security.core.support.SimpleResponse;
 import com.imooc.security.core.support.SocialUserInfo;
 
 /**
+ * 浏览器环境下与安全相关的服务
+ * 
  * @author zhailiang
  *
  */
@@ -76,6 +78,12 @@ public class BrowserSecurityController {
 		return new SimpleResponse("访问的服务需要身份认证，请引导用户到登录页");
 	}
 
+	/**
+	 * 用户第一次社交登录时，会引导用户进行用户注册或绑定，此服务用于在注册或绑定页面获取社交网站用户信息
+	 * 
+	 * @param request
+	 * @return
+	 */
 	@GetMapping("/social/user")
 	public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
 		SocialUserInfo userInfo = new SocialUserInfo();

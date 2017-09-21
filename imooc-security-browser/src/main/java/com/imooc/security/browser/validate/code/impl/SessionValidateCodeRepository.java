@@ -13,6 +13,8 @@ import com.imooc.security.core.validate.code.ValidateCodeRepository;
 import com.imooc.security.core.validate.code.ValidateCodeType;
 
 /**
+ * 基于session的验证码存取器
+ * 
  * @author zhailiang
  *
  */

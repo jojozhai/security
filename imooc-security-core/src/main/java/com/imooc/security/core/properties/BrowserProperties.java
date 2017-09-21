@@ -11,15 +11,20 @@ public class BrowserProperties {
 	
 	private SessionProperties session = new SessionProperties();
 	
-	private String signUpUrl = "/imooc-signUp.html";
+	private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
+	
+	private int rememberMeSeconds = 3600;
 	
 	private String signOutUrl;
 	
-	private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
+	private String signUpUrl = "/imooc-signUp.html";
 	
 	private LoginResponseType loginType = LoginResponseType.JSON;
+	/**
+	 * 登录成功后跳转的地址，如果设置了此属性，则登录成功后总是会跳到这个地址上。
+	 */
+	private String singInSuccessUrl;
 	
-	private int rememberMeSeconds = 3600;
 
 	public String getLoginPage() {
 		return loginPage;
@@ -67,6 +72,14 @@ public class BrowserProperties {
 
 	public void setSignOutUrl(String signOutUrl) {
 		this.signOutUrl = signOutUrl;
+	}
+
+	public String getSingInSuccessUrl() {
+		return singInSuccessUrl;
+	}
+
+	public void setSingInSuccessUrl(String singInSuccessUrl) {
+		this.singInSuccessUrl = singInSuccessUrl;
 	}
 	
 }

@@ -21,6 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.imooc.security.core.support.SimpleResponse;
 
 /**
+ * 抽象的session失效处理器
+ * 
  * @author zhailiang
  *
  */
