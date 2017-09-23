@@ -24,8 +24,8 @@ import com.imooc.security.rbac.repository.AdminRepository;
  * @author zhailiang
  *
  */
-@Component
-@Transactional
+//@Component
+//@Transactional
 public class DemoUserDetailsService implements UserDetailsService, SocialUserDetailsService {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
