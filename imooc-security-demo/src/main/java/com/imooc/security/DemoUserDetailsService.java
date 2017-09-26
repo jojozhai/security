@@ -14,16 +14,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.social.security.SocialUser;
 import org.springframework.social.security.SocialUserDetails;
 import org.springframework.social.security.SocialUserDetailsService;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.imooc.security.rbac.domain.Admin;
-import com.imooc.security.rbac.repository.AdminRepository;
 
 /**
  * @author zhailiang
  *
  */
-//@Component
-//@Transactional
+@Component
+@Transactional
 public class DemoUserDetailsService implements UserDetailsService, SocialUserDetailsService {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
@@ -31,8 +31,6 @@ public class DemoUserDetailsService implements UserDetailsService, SocialUserDet
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@Autowired
-	private AdminRepository adminRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -42,10 +40,11 @@ public class DemoUserDetailsService implements UserDetailsService, SocialUserDet
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		logger.info("表单登录用户名:" + username);
-		Admin admin = adminRepository.findByUsername(username);
-		admin.getUrls();
-		return admin;
+//		logger.info("表单登录用户名:" + username);
+//		Admin admin = adminRepository.findByUsername(username);
+//		admin.getUrls();
+//		return admin;
+		return buildUser(username);
 	}
 
 	@Override
