@@ -57,7 +57,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
 		}
 		return repository;
 	}
-
+	
 	/**
 	 * 社交登录配置类，供浏览器或app模块引入设计登录配置用。
 	 * @return

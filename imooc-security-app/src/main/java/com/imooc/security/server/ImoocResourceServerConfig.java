@@ -69,5 +69,5 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
 		
 		authorizeConfigManager.config(http.authorizeRequests());
 	}
-
+	
 }
