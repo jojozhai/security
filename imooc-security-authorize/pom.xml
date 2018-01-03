@@ -5,6 +5,7 @@
 		<groupId>com.imooc.security</groupId>
 		<artifactId>imooc-security</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../imooc-security</relativePath>
 	</parent>
 	<artifactId>imooc-security-authorize</artifactId>
 
