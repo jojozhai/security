@@ -3,13 +3,17 @@
  */
 package com.imooc.security.browser;
 
+import java.util.Set;
+
 import javax.sql.DataSource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
@@ -67,23 +71,35 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private FormAuthenticationConfig formAuthenticationConfig;
 	
+	@Autowired
+	private Set<BrowserSecurityConfigCallback> configCallbacks;
+	
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers(HttpMethod.GET, "/**/*.css", "/**/*.js", "/**/*.png", "/**/*.gif", "/**/*.jpg");
+	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		formAuthenticationConfig.configure(http);
+		if(CollectionUtils.isNotEmpty(configCallbacks)) {
+			configCallbacks.forEach(callback -> callback.config(http));
+		}
+		
+//		formAuthenticationConfig.configure(http);
 		
 		http.apply(validateCodeSecurityConfig)
 				.and()
-			.apply(smsCodeAuthenticationSecurityConfig)
-				.and()
-			.apply(imoocSocialSecurityConfig)
-				.and()
-			//记住我配置，如果想在'记住我'登录时记录日志，可以注册一个InteractiveAuthenticationSuccessEvent事件的监听器
-			.rememberMe()
-				.tokenRepository(persistentTokenRepository())
-				.tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
-				.userDetailsService(userDetailsService)
-				.and()
+//			.apply(smsCodeAuthenticationSecurityConfig)
+//				.and()
+//			.apply(imoocSocialSecurityConfig)
+//				.and()
+//			//记住我配置，如果想在'记住我'登录时记录日志，可以注册一个InteractiveAuthenticationSuccessEvent事件的监听器
+//			.rememberMe()
+//				.tokenRepository(persistentTokenRepository())
+//				.tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
+//				.userDetailsService(userDetailsService)
+//				.and()
 			.sessionManagement()
 				.invalidSessionStrategy(invalidSessionStrategy)
 				.maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions())
@@ -96,7 +112,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 				.logoutSuccessHandler(logoutSuccessHandler)
 				.deleteCookies("JSESSIONID")
 				.and()
-			.csrf().disable();
+			.csrf().disable()
+			.headers().frameOptions().disable();
 		
 		authorizeConfigManager.config(http.authorizeRequests());
 		
