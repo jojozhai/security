@@ -1,0 +1,15 @@
+<html>
+<body>
+<h1>OAuth Approval</h1>
+" + "
+<p>Do you authorize '${authorizationRequest.clientId}' to access
+    your protected resources?</p>
+" + "
+<form action='${path}/oauth/authorize' id='confirmationForm'
+      method='post' name='confirmationForm'>
+    <input name='user_oauth_approval' type='hidden' value='true'/>%csrf%%scopes%<label><input
+        name='authorize' type='submit' value='Authorize'/></label>
+</form>
+" + "%denial%
+</body>
+</html>
