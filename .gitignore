@@ -1,38 +1,25 @@
-# Compiled class file
-*.class
+target/
+.mvn/
 
-# Log file
-*.log
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
-# BlueJ files
-*.ctxt
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-imooc-security-authorize/.project
-imooc-security-authorize/.settings/
-imooc-security-authorize/target/
-imooc-security-browser/.settings/
-imooc-security-browser/target/
-imooc-security-app/.settings/
-imooc-security-app/target/
-imooc-security-core/.settings/
-imooc-security-core/target/
-imooc-security-demo/.settings/
-imooc-security-demo/target/
-imooc-security-authorize/.classpath
-*.project
-*.classpath
-*.factorypath
-imooc-security/.settings/org.eclipse.m2e.core.prefs
+### NetBeans ###
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
