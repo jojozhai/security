@@ -1,12 +1,13 @@
 /**
- * 
+ *
  */
 package com.imooc.security.browser;
 
-import java.util.Set;
-
-import javax.sql.DataSource;
-
+import com.imooc.security.core.authentication.FormAuthenticationConfig;
+import com.imooc.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
+import com.imooc.security.core.authorize.AuthorizeConfigManager;
+import com.imooc.security.core.properties.SecurityProperties;
+import com.imooc.security.core.validate.code.ValidateCodeSecurityConfig;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,73 +24,70 @@ import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.social.security.SpringSocialConfigurer;
 
-import com.imooc.security.core.authentication.FormAuthenticationConfig;
-import com.imooc.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
-import com.imooc.security.core.authorize.AuthorizeConfigManager;
-import com.imooc.security.core.properties.SecurityProperties;
-import com.imooc.security.core.validate.code.ValidateCodeSecurityConfig;
+import javax.sql.DataSource;
+import java.util.Set;
 
 /**
  * 浏览器环境下安全配置主类
- * 
+ *
  * @author zhailiang
  *
  */
 @Configuration
 public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	@Autowired
-	private SecurityProperties securityProperties;
-	
-	@Autowired
-	private DataSource dataSource;
-	
-	@Autowired
-	private UserDetailsService userDetailsService;
-	
-	@Autowired
-	private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
-	
-	@Autowired
-	private ValidateCodeSecurityConfig validateCodeSecurityConfig;
-	
-	@Autowired
-	private SpringSocialConfigurer imoocSocialSecurityConfig;
-	
-	@Autowired
-	private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
-	
-	@Autowired
-	private InvalidSessionStrategy invalidSessionStrategy;
-	
-	@Autowired
-	private LogoutSuccessHandler logoutSuccessHandler;
-	
-	@Autowired
-	private AuthorizeConfigManager authorizeConfigManager;
-	
-	@Autowired
-	private FormAuthenticationConfig formAuthenticationConfig;
-	
-	@Autowired
-	private Set<BrowserSecurityConfigCallback> configCallbacks;
-	
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers(HttpMethod.GET, "/**/*.css", "/**/*.js", "/**/*.png", "/**/*.gif", "/**/*.jpg");
-	}
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		
-		if(CollectionUtils.isNotEmpty(configCallbacks)) {
-			configCallbacks.forEach(callback -> callback.config(http));
-		}
-		
+
+    @Autowired
+    private SecurityProperties securityProperties;
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+
+    @Autowired
+    private ValidateCodeSecurityConfig validateCodeSecurityConfig;
+
+    @Autowired
+    private SpringSocialConfigurer imoocSocialSecurityConfig;
+
+    @Autowired
+    private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
+
+    @Autowired
+    private InvalidSessionStrategy invalidSessionStrategy;
+
+    @Autowired
+    private LogoutSuccessHandler logoutSuccessHandler;
+
+    @Autowired
+    private AuthorizeConfigManager authorizeConfigManager;
+
+    @Autowired
+    private FormAuthenticationConfig formAuthenticationConfig;
+
+    @Autowired
+    private Set<BrowserSecurityConfigCallback> configCallbacks;
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(HttpMethod.GET, "/**/*.css", "/**/*.js", "/**/*.png", "/**/*.gif", "/**/*.jpg");
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+
+        if (CollectionUtils.isNotEmpty(configCallbacks)) {
+            configCallbacks.forEach(callback -> callback.config(http));
+        }
+
 //		formAuthenticationConfig.configure(http);
-		
-		http.apply(validateCodeSecurityConfig)
-				.and()
+
+        http.apply(validateCodeSecurityConfig)
+                .and()
 //			.apply(smsCodeAuthenticationSecurityConfig)
 //				.and()
 //			.apply(imoocSocialSecurityConfig)
@@ -100,35 +98,35 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 //				.tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
 //				.userDetailsService(userDetailsService)
 //				.and()
-			.sessionManagement()
-				.invalidSessionStrategy(invalidSessionStrategy)
-				.maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions())
-				.maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())
-				.expiredSessionStrategy(sessionInformationExpiredStrategy)
-				.and()
-				.and()
-			.logout()
-				.logoutUrl("/signOut")
-				.logoutSuccessHandler(logoutSuccessHandler)
-				.deleteCookies("JSESSIONID")
-				.and()
-			.csrf().disable()
-			.headers().frameOptions().disable();
-		
-		authorizeConfigManager.config(http.authorizeRequests());
-		
-	}
+                .sessionManagement()
+                .invalidSessionStrategy(invalidSessionStrategy)
+                .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions())
+                .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())
+                .expiredSessionStrategy(sessionInformationExpiredStrategy)
+                .and()
+                .and()
+                .logout()
+                .logoutUrl("/signOut")
+                .logoutSuccessHandler(logoutSuccessHandler)
+                .deleteCookies("JSESSIONID")
+                .and()
+                .csrf().disable()
+                .headers().frameOptions().disable();
 
-	/**
-	 * 记住我功能的token存取器配置
-	 * @return
-	 */
-	@Bean
-	public PersistentTokenRepository persistentTokenRepository() {
-		JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
-		tokenRepository.setDataSource(dataSource);
+        authorizeConfigManager.config(http.authorizeRequests());
+
+    }
+
+    /**
+     * 记住我功能的token存取器配置
+     * @return
+     */
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
 //		tokenRepository.setCreateTableOnStartup(true);
-		return tokenRepository;
-	}
-	
+        return tokenRepository;
+    }
+
 }

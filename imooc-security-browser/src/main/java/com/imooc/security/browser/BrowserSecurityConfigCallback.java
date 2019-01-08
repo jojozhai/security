@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.imooc.security.browser;
 
@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
  *
  */
 public interface BrowserSecurityConfigCallback {
-	
-	void config(HttpSecurity http);
+
+    void config(HttpSecurity http);
 
 }

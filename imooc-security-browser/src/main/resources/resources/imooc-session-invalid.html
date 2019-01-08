@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Session失效</title>
+    <meta charset="UTF-8">
+    <title>Session失效</title>
 </head>
 <body>
-	<h2>安全模块默认的session失效提示页面</h2>
-	<h3>请通过imooc.security.browser.session.sessionInvalidUrl配置自己的页面URL</h3>
-	<h3>此页面将在3秒后跳转到登录页</h3>
-	<script type="text/javascript">
-		setInterval(function(){window.location.href = "/imooc-signIn.html"}, 3000);
-	</script>
+<h2>安全模块默认的session失效提示页面</h2>
+<h3>请通过imooc.security.browser.session.sessionInvalidUrl配置自己的页面URL</h3>
+<h3>此页面将在3秒后跳转到登录页</h3>
+<script type="text/javascript">
+    setInterval(function () {
+        window.location.href = "/imooc-signIn.html"
+    }, 3000);
+</script>
 </body>
 </html>
