@@ -1,11 +1,10 @@
 /**
- * 
+ *
  */
 package com.imooc.security.rbac.repository;
 
-import org.springframework.stereotype.Repository;
-
 import com.imooc.security.rbac.domain.Admin;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author zhailiang
@@ -14,6 +13,6 @@ import com.imooc.security.rbac.domain.Admin;
 @Repository
 public interface AdminRepository extends ImoocRepository<Admin> {
 
-	Admin findByUsername(String username);
+    Admin findByUsername(String username);
 
 }

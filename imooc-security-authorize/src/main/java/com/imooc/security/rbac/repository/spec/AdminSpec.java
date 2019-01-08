@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.imooc.security.rbac.repository.spec;
 
@@ -14,13 +14,13 @@ import com.imooc.security.rbac.repository.support.QueryWraper;
  */
 public class AdminSpec extends ImoocSpecification<Admin, AdminCondition> {
 
-	public AdminSpec(AdminCondition condition) {
-		super(condition);
-	}
+    public AdminSpec(AdminCondition condition) {
+        super(condition);
+    }
 
-	@Override
-	protected void addCondition(QueryWraper<Admin> queryWraper) {
-		addLikeCondition(queryWraper, "username");
-	}
+    @Override
+    protected void addCondition(QueryWraper<Admin> queryWraper) {
+        addLikeCondition(queryWraper, "username");
+    }
 
 }

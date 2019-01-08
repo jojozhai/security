@@ -28,8 +28,7 @@ angular.module('platform').controller('contentCtrl', function ($scope, $state, r
                 }
             });
             return foundActive;
-        }
-        else {
+        } else {
             return $state.is(item.link) || $state.includes(item.link);
         }
     }

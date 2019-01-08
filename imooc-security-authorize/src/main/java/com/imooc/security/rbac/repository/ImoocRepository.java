@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.imooc.security.rbac.repository;
 

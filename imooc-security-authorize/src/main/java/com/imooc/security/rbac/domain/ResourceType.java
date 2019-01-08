@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.imooc.security.rbac.domain;
 
@@ -8,9 +8,9 @@ package com.imooc.security.rbac.domain;
  *
  */
 public enum ResourceType {
-	
-	MENU,
-	
-	BUTTON
+
+    MENU,
+
+    BUTTON
 
 }

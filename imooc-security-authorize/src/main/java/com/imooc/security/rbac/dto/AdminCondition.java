@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.imooc.security.rbac.dto;
 
@@ -8,21 +8,21 @@ package com.imooc.security.rbac.dto;
  *
  */
 public class AdminCondition {
-	
-	private String username;
 
-	/**
-	 * @return the username
-	 */
-	public String getUsername() {
-		return username;
-	}
+    private String username;
 
-	/**
-	 * @param username the username to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 }

@@ -1,11 +1,10 @@
 /**
- * 
+ *
  */
 package com.imooc.security.rbac.repository;
 
-import org.springframework.stereotype.Repository;
-
 import com.imooc.security.rbac.domain.Resource;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author zhailiang
@@ -14,6 +13,6 @@ import com.imooc.security.rbac.domain.Resource;
 @Repository
 public interface ResourceRepository extends ImoocRepository<Resource> {
 
-	Resource findByName(String name);
+    Resource findByName(String name);
 
 }

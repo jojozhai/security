@@ -1,11 +1,10 @@
 /**
- * 
+ *
  */
 package com.imooc.security.rbac.repository;
 
-import org.springframework.stereotype.Repository;
-
 import com.imooc.security.rbac.domain.RoleResource;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author zhailiang
