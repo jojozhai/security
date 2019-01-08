@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.imooc.security.core.validate.code;
 
@@ -12,11 +12,11 @@ import org.springframework.web.context.request.ServletWebRequest;
  */
 public interface ValidateCodeGenerator {
 
-	/**
-	 * 生成校验码
-	 * @param request
-	 * @return
-	 */
-	ValidateCode generate(ServletWebRequest request);
-	
+    /**
+     * 生成校验码
+     * @param request
+     * @return
+     */
+    ValidateCode generate(ServletWebRequest request);
+
 }

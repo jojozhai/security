@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.imooc.security.core.validate.code.sms;
 
@@ -8,11 +8,11 @@ package com.imooc.security.core.validate.code.sms;
  *
  */
 public interface SmsCodeSender {
-	
-	/**
-	 * @param mobile
-	 * @param code
-	 */
-	void send(String mobile, String code) throws Exception;
+
+    /**
+     * @param mobile
+     * @param code
+     */
+    void send(String mobile, String code) throws Exception;
 
 }
