@@ -103,7 +103,7 @@ public class ImoocAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
 		byte[] base64Token = header.substring(6).getBytes("UTF-8");
 		byte[] decoded;
 		try {
-			decoded = Base64.decode(base64Token);
+			decoded = java.util.Base64.getDecoder().decode(base64Token);
 		} catch (IllegalArgumentException e) {
 			throw new BadCredentialsException("Failed to decode basic authentication token");
 		}
