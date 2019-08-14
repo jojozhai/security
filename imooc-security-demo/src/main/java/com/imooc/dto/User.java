@@ -5,9 +5,9 @@ package com.imooc.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.imooc.validator.MyConstraint;

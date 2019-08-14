@@ -32,6 +32,8 @@ public class SmsCodeProcessor extends AbstractValidateCodeProcessor<ValidateCode
 		String paramName = SecurityConstants.DEFAULT_PARAMETER_NAME_MOBILE;
 		String mobile = ServletRequestUtils.getRequiredStringParameter(request.getRequest(), paramName);
 		smsCodeSender.send(mobile, validateCode.getCode());
+		request.getResponse().getWriter().println(validateCode.getCode());
+		request.getResponse().flushBuffer();
 	}
 
 }
