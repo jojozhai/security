@@ -55,4 +55,11 @@ public class QQOAuth2Template extends OAuth2Template {
 		return restTemplate;
 	}
 
+	
+	public static void main(String[] args) {
+		Long id1 = 12345L;
+		Long id2 = 12345L;
+		System.out.println(id1.equals(id2));
+		System.out.println(id1 == id2);
+	}
 }
