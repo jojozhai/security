@@ -42,12 +42,11 @@ public class ImoocAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
 
 	private RequestCache requestCache = new HttpSessionRequestCache();
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see org.springframework.security.web.authentication.
-	 * AuthenticationSuccessHandler#onAuthenticationSuccess(javax.servlet.http.
-	 * HttpServletRequest, javax.servlet.http.HttpServletResponse,
+	 * @see org.springframework.security.web.authentication.AuthenticationSuccessHandler
+	 * 	onAuthenticationSuccess(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse,
 	 * org.springframework.security.core.Authentication)
 	 */
 	@Override

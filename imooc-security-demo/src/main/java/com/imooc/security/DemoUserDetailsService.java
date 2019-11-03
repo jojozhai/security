@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author zhailiang
  *
  */
-@Component
+//@Component
 @Transactional
 public class DemoUserDetailsService implements UserDetailsService, SocialUserDetailsService {
 

@@ -24,6 +24,7 @@ public class ImageCodeProcessor extends AbstractValidateCodeProcessor<ImageCode>
 	 */
 	@Override
 	protected void send(ServletWebRequest request, ImageCode imageCode) throws Exception {
+		request.getResponse().setContentType("image/jpg; charset=utf-8");
 		ImageIO.write(imageCode.getImage(), "JPEG", request.getResponse().getOutputStream());
 	}
 

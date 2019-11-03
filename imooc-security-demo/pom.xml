@@ -15,13 +15,12 @@
 			<artifactId>imooc-security-browser</artifactId>
 			<version>${imooc.security.version}</version>
 		</dependency>
-		
-		<!-- 
 		<dependency>
 			<groupId>com.imooc.security</groupId>
 			<artifactId>imooc-security-authorize</artifactId>
 			<version>${imooc.security.version}</version>
 		</dependency>
+		<!--
 		<dependency>
 			<groupId>com.imooc.security</groupId>
 			<artifactId>imooc-security-app</artifactId>
@@ -39,6 +38,7 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -53,6 +53,7 @@
 		<dependency>
 			<groupId>com.github.tomakehurst</groupId>
 			<artifactId>wiremock</artifactId>
+			<version>2.24.1</version>
 		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
