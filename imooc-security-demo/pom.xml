@@ -37,8 +37,9 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.6</version>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -51,9 +52,14 @@
 			<version>2.7.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.github.tomakehurst</groupId>
-			<artifactId>wiremock</artifactId>
+		    <groupId>com.github.tomakehurst</groupId>
+		    <artifactId>wiremock</artifactId>
+		    <version>2.6.0</version>
 		</dependency>
+		<dependency>
+	        <groupId>org.hibernate.validator</groupId>
+	        <artifactId>hibernate-validator</artifactId>
+      	</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>

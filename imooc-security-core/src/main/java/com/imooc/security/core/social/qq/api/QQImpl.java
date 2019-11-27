@@ -4,6 +4,7 @@
 package com.imooc.security.core.social.qq.api;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.social.UserIdSource;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.TokenStrategy;
 
@@ -13,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author zhailiang
  *
  */
-public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
+public class QQImpl extends AbstractOAuth2ApiBinding implements QQ, UserIdSource {
 	
 	private static final String URL_GET_OPENID = "https://graph.qq.com/oauth2.0/me?access_token=%s";
 	
@@ -57,6 +58,11 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
 		} catch (Exception e) {
 			throw new RuntimeException("获取用户信息失败", e);
 		}
+	}
+
+	@Override
+	public String getUserId() {
+		return getUserInfo().getOpenId();
 	}
 
 }

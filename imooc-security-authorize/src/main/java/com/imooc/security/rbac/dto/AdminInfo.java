@@ -3,7 +3,7 @@
  */
 package com.imooc.security.rbac.dto;
 
-import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author zhailiang
