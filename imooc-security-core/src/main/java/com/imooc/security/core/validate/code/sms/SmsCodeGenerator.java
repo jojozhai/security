@@ -22,12 +22,11 @@ public class SmsCodeGenerator implements ValidateCodeGenerator {
 	@Autowired
 	private SecurityProperties securityProperties;
 	
-	/*
+	/**
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.imooc.security.core.validate.code.ValidateCodeGenerator#generate(org.
-	 * springframework.web.context.request.ServletWebRequest)
+	 * com.imooc.security.core.validate.code.ValidateCodeGenerator#generate(org.springframework.web.context.request.ServletWebRequest)
 	 */
 	@Override
 	public ValidateCode generate(ServletWebRequest request) {
