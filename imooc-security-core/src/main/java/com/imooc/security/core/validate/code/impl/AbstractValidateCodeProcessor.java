@@ -31,7 +31,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
 	@Autowired
 	private Map<String, ValidateCodeGenerator> validateCodeGenerators;
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see com.imooc.security.core.validate.code.ValidateCodeProcessor#create(org.springframework.web.context.request.ServletWebRequest)
 	 */
 	@Override
